@@ -183,7 +183,7 @@ export default function Home() {
                   Get early access
                 </h2>
                 <p className="text-2xl md:text-3xl lg:text-4xl text-gray-600">
-                  Join the waitlist. We'll email you when the demo is ready.
+                  Join the waitlist. We&apos;ll email you when the demo is ready.
                 </p>
               </div>
               
@@ -399,7 +399,7 @@ export default function Home() {
                 <div className="flex items-start gap-3">
                   <Users className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-gray-700 text-left">
-                    <strong>Built for creators and neurodivergent users.</strong> Our early community includes people managing complex, non-linear workflows. If you've ever felt overwhelmed by productivity tools, this is for you.
+                    <strong>Built for creators and neurodivergent users.</strong> Our early community includes people managing complex, non-linear workflows. If you&apos;ve ever felt overwhelmed by productivity tools, this is for you.
                   </p>
                 </div>
               </CardContent>
