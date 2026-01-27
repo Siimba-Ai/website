@@ -422,7 +422,7 @@ export default function Home() {
               Security & Control
             </h2>
             <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
-              You're always in the driver's seat. Here's how we keep it that way.
+              You&apos;re always in the driver&apos;s seat. Here&apos;s how we keep it that way.
             </p>
           </motion.div>
 

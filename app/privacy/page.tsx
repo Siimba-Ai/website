@@ -100,7 +100,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2>Children's Privacy</h2>
+            <h2>Children&apos;s Privacy</h2>
             <p>
               Siimba is not intended for users under 13 years of age. We do not
               knowingly collect information from children.
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
           <section>
             <h2>Changes to This Policy</h2>
             <p>
-              We may update this policy from time to time. We'll notify you of
+              We may update this policy from time to time. We&apos;ll notify you of
               significant changes via email or through the service.
             </p>
           </section>

@@ -86,7 +86,7 @@ export default function TermsPage() {
           <section>
             <h2>Limitation of Liability</h2>
             <p>
-              Siimba is provided "as is" without warranties of any kind. We are
+              Siimba is provided &quot;as is&quot; without warranties of any kind. We are
               not liable for any damages arising from your use of the service,
               including but not limited to: missed appointments, incorrect
               messages, data loss, or service interruptions.
@@ -105,7 +105,7 @@ export default function TermsPage() {
           <section>
             <h2>Changes to Service</h2>
             <p>
-              We may modify or discontinue the service at any time. We'll
+              We may modify or discontinue the service at any time. We&apos;ll
               provide notice of significant changes when possible.
             </p>
           </section>

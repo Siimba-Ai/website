@@ -111,10 +111,10 @@ export function WaitlistForm() {
           <Check className="h-8 w-8 text-green-600" />
         </div>
         <h3 className="mb-4 text-3xl md:text-4xl font-bold text-gray-900">
-          You're on the list!
+          You&apos;re on the list!
         </h3>
         <p className="mb-6 text-xl md:text-2xl text-gray-600">
-          We'll email you when the demo is ready. No spam.
+          We&apos;ll email you when the demo is ready. No spam.
         </p>
         <Button
           onClick={() => setIsSuccess(false)}
@@ -155,7 +155,7 @@ export function WaitlistForm() {
 
       <div>
         <label htmlFor="category" className="mb-3 block text-xl md:text-2xl font-medium text-gray-700">
-          I'm using Siimba for:
+          I&apos;m using Siimba for:
         </label>
         <select
           id="category"
@@ -182,7 +182,7 @@ export function WaitlistForm() {
           className="mt-1 h-5 w-5 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary"
         />
         <label htmlFor="interview" className="text-lg md:text-xl text-gray-700">
-          I'm open to a 15-min user interview
+          I&apos;m open to a 15-min user interview
         </label>
       </div>
 
