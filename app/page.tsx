@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { trackEvents } from "@/lib/analytics"
+import { cn } from "@/lib/utils"
 
 const heroCards: DecisionCard[] = [
   {
@@ -111,13 +112,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="space-y-6"
+              className="space-y-8"
             >
-              <Badge>Early Access</Badge>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-charcoal leading-[1.05] tracking-tight">
-                You wake up. You swipe yes 4 times. Your day is handled.
+
+              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal leading-[1.1] tracking-tight">
+                You wake up.<br />
+                You swipe yes 4 times.<br />
+                <span className="bg-gradient-to-r from-sage to-pink bg-clip-text text-transparent">
+                  Your day is handled.
+                </span>
               </h1>
-              <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal/70 leading-relaxed max-w-4xl">
+              <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/60 leading-relaxed max-w-3xl font-medium">
                 Siimba prepares a small stack of decisions every morning. You approve, not juggle. Reduce decision fatigue and start your day staged.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -175,11 +180,16 @@ export default function Home() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left side: Text */}
-              <div className="text-left">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-charcoal mb-6">
+              <div className="text-left space-y-6">
+                <div className="inline-block">
+                  <Badge className="text-base px-4 py-2 backdrop-blur-xl border-pink/40 bg-pink/20">
+                    Limited Spots
+                  </Badge>
+                </div>
+                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal leading-tight">
                   Get early access
                 </h2>
-                <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal/70">
+                <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/60 font-medium max-w-lg">
                   Join the waitlist. We'll email you when the demo is ready.
                 </p>
               </div>
@@ -205,32 +215,38 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="text-center mb-16"
+            className="text-center mb-20 space-y-6"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal mb-4">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal leading-tight">
               How it works
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/70 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/60 max-w-3xl mx-auto font-medium">
               Siimba follows a simple review and approve model. You stay in control while reducing cognitive load.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
             {[
               {
-                icon: <Zap className="h-8 w-8" />,
+                number: "01",
+                icon: <Zap className="h-10 w-10" />,
                 title: "Nightly Synthesis",
                 description: "While you sleep, Siimba reviews your calendar, emails, tasks, and patterns. It preps your day based on priorities and context.",
+                accent: "pink",
               },
               {
-                icon: <Layers className="h-8 w-8" />,
+                number: "02",
+                icon: <Layers className="h-10 w-10" />,
                 title: "Morning Stack",
                 description: "Wake up to 4 to 10 decision cards. Prioritized, prepped, and ready. No dashboards. No endless scrolling.",
+                accent: "sage",
               },
               {
-                icon: <CheckCircle2 className="h-8 w-8" />,
+                number: "03",
+                icon: <CheckCircle2 className="h-10 w-10" />,
                 title: "You Approve",
                 description: "Swipe to approve, edit, or snooze. Siimba executes or drafts. You maintain agency without the juggling.",
+                accent: "pink",
               },
             ].map((step, idx) => (
               <motion.div
@@ -239,16 +255,41 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 300, damping: 30, delay: idx * 0.1 }}
+                className="group"
               >
-                <Card className="glass-card">
-                  <CardHeader>
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-sage/20 text-sage">
+                <Card className={cn(
+                  "glass-card relative overflow-hidden hover:glass-elevated spring-transition h-full",
+                  "border-2 border-white/40"
+                )}>
+                  {/* Accent gradient overlay */}
+                  <div className={cn(
+                    "absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20 group-hover:opacity-30 spring-transition",
+                    step.accent === "pink" ? "bg-pink" : "bg-sage"
+                  )} />
+
+                  <CardHeader className="relative pb-4">
+                    {/* Number indicator */}
+                    <div className="absolute -top-2 -right-2 text-7xl md:text-8xl font-bold text-charcoal/5 select-none">
+                      {step.number}
+                    </div>
+
+                    {/* Icon with glass background */}
+                    <div className={cn(
+                      "mb-6 flex h-20 w-20 items-center justify-center rounded-[20px] spring-transition group-hover:scale-110",
+                      step.accent === "pink" ? "glass-card-pink" : "glass-card-green",
+                      step.accent === "pink" ? "text-pink" : "text-sage"
+                    )}>
                       {step.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{step.title}</CardTitle>
+
+                    <CardTitle className="text-2xl md:text-3xl font-bold mb-3 relative z-10">
+                      {step.title}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-xl md:text-2xl text-charcoal/70">{step.description}</p>
+                  <CardContent className="relative">
+                    <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed">
+                      {step.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -260,12 +301,15 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.4 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <Card className="mx-auto max-w-3xl glass-card-green">
-              <CardContent className="pt-6">
-                <p className="text-xl md:text-2xl text-charcoal">
-                  <strong>Proactive but bounded.</strong> Siimba suggests and drafts, but never acts without your approval. It reduces decision fatigue, not critical thinking.
+            <Card className="mx-auto max-w-3xl glass-card-green border-2 border-sage/30 shadow-xl relative overflow-hidden">
+              {/* Decorative blob */}
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-sage/20 rounded-full blur-3xl" />
+
+              <CardContent className="pt-8 pb-8 relative">
+                <p className="text-xl md:text-2xl text-charcoal leading-relaxed">
+                  <strong className="font-bold text-charcoal">Proactive but bounded.</strong> Siimba suggests and drafts, but never acts without your approval. It reduces decision fatigue, not critical thinking.
                 </p>
               </CardContent>
             </Card>
@@ -533,7 +577,7 @@ function FloatingBlobs() {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <motion.div
-        className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink/40 blur-3xl"
+        className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink/10 blur-3xl"
         animate={{
           x: [0, 30, 0],
           y: [0, 50, 0],
@@ -546,7 +590,7 @@ function FloatingBlobs() {
         }}
       />
       <motion.div
-        className="absolute right-0 top-32 h-[600px] w-[600px] rounded-full bg-sage/35 blur-3xl"
+        className="absolute right-0 top-32 h-[600px] w-[600px] rounded-full bg-sage/8 blur-3xl"
         animate={{
           x: [0, -40, 0],
           y: [0, 60, 0],
@@ -554,19 +598,6 @@ function FloatingBlobs() {
         }}
         transition={{
           duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute left-1/2 bottom-0 h-[500px] w-[500px] rounded-full bg-beige/50 blur-3xl"
-        animate={{
-          x: [0, 50, 0],
-          y: [0, -30, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 30,
           repeat: Infinity,
           ease: "easeInOut",
         }}

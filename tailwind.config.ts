@@ -64,7 +64,7 @@ const config: Config = {
         },
         pink: '#E8B4B8',
         sage: '#A8C5B4',
-        beige: '#F5F1ED',
+        beige: '#F7F7F7',
         charcoal: '#4A5759',
       },
       fontFamily: {
@@ -93,6 +93,10 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      boxShadow: {
+        glass: '0 8px 32px rgba(0, 0, 0, 0.08)',
+        'glass-elevated': '0 12px 48px rgba(0, 0, 0, 0.12)',
       },
     },
   },

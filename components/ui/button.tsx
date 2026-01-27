@@ -3,25 +3,25 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-base font-semibold transition-all duration-200 spring-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-base font-semibold transition-all duration-300 spring-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden",
   {
     variants: {
       variant: {
-        default: "bg-sage text-charcoal hover:bg-sage/90 hover:shadow-lg hover:shadow-sage/30",
+        default: "bg-sage text-charcoal hover:bg-sage/90 hover:shadow-2xl hover:shadow-sage/40 hover:-translate-y-0.5 active:translate-y-0",
         destructive:
-          "bg-pink/30 backdrop-blur-md text-[#C85A6E] hover:bg-pink/40",
+          "bg-pink/30 backdrop-blur-md text-[#C85A6E] hover:bg-pink/40 border border-pink/30",
         outline:
-          "border border-charcoal/20 glass-card hover:bg-white/80",
+          "border-2 border-charcoal/20 glass-card hover:glass-elevated hover:border-sage/40",
         secondary:
           "bg-beige text-charcoal hover:bg-beige/80",
         ghost: "hover:bg-accent/10 hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-sage underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-11 px-6 py-3",
-        sm: "h-9 px-4 py-2",
-        lg: "h-[44px] px-8 py-3.5",
-        icon: "h-11 w-11",
+        default: "h-12 px-6 py-3",
+        sm: "h-10 px-4 py-2",
+        lg: "h-[48px] px-10 py-4",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {

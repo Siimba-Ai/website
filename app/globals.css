@@ -7,10 +7,10 @@
     /* Siimba Brand Colors */
     --color-pink: 351 38% 82%;        /* #E8B4B8 */
     --color-sage: 145 21% 72%;        /* #A8C5B4 */
-    --color-beige: 30 29% 95%;        /* #F5F1ED */
-    --color-off-white: 40 60% 99%;    /* #FEFDFB */
+    --color-beige: 0 0% 97%;          /* #F7F7F7 - More white */
+    --color-off-white: 0 0% 99%;      /* #FCFCFC */
     --color-charcoal: 188 9% 32%;     /* #4A5759 */
-    --color-light-gray: 30 11% 87%;   /* #E0DDD9 */
+    --color-light-gray: 0 0% 90%;     /* #E5E5E5 */
 
     /* Semantic Tokens */
     --background: 30 29% 95%;          /* Warm Beige */
@@ -48,9 +48,8 @@
   body {
     @apply text-foreground;
     background:
-      radial-gradient(at 20% 30%, rgba(232, 180, 184, 0.25) 0px, transparent 60%),
-      radial-gradient(at 80% 70%, rgba(168, 197, 180, 0.25) 0px, transparent 60%),
-      radial-gradient(at 50% 50%, rgba(245, 241, 237, 0.5) 0px, transparent 100%),
+      radial-gradient(at 20% 30%, rgba(232, 180, 184, 0.06) 0px, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(168, 197, 180, 0.06) 0px, transparent 50%),
       hsl(var(--color-beige));
   }
 }
@@ -109,46 +108,60 @@ body {
   }
 }
 
-/* Glassmorphism Effects */
+/* Liquidmorphism Effects - VisionOS Inspired */
 @layer utilities {
   .glass-card {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 2px 8px rgba(255, 255, 255, 0.4) inset,
+      0 -2px 8px rgba(0, 0, 0, 0.05) inset,
+      0 0 0 1px rgba(255, 255, 255, 0.3) inset;
   }
 
   .glass-card-pink {
-    background: rgba(232, 180, 184, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(232, 180, 184, 0.4);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(232, 180, 184, 0.25) 100%);
+    backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    border: 1.5px solid rgba(232, 180, 184, 0.5);
     box-shadow:
-      0 8px 32px rgba(232, 180, 184, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      0 8px 32px rgba(232, 180, 184, 0.25),
+      0 2px 12px rgba(255, 255, 255, 0.5) inset,
+      0 -2px 8px rgba(232, 180, 184, 0.1) inset,
+      0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+      0 4px 16px rgba(232, 180, 184, 0.3);
   }
 
   .glass-card-green {
-    background: rgba(168, 197, 180, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(168, 197, 180, 0.4);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(168, 197, 180, 0.25) 100%);
+    backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+    border: 1.5px solid rgba(168, 197, 180, 0.5);
     box-shadow:
-      0 8px 32px rgba(168, 197, 180, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      0 8px 32px rgba(168, 197, 180, 0.25),
+      0 2px 12px rgba(255, 255, 255, 0.5) inset,
+      0 -2px 8px rgba(168, 197, 180, 0.1) inset,
+      0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+      0 4px 16px rgba(168, 197, 180, 0.3);
   }
 
   .glass-elevated {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(60px) saturate(200%);
-    -webkit-backdrop-filter: blur(60px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 100%);
+    backdrop-filter: blur(80px) saturate(200%) brightness(1.15);
+    -webkit-backdrop-filter: blur(80px) saturate(200%) brightness(1.15);
+    border: 2px solid rgba(255, 255, 255, 0.7);
     box-shadow:
-      0 12px 48px rgba(0, 0, 0, 0.15),
-      inset 0 2px 0 rgba(255, 255, 255, 0.9);
+      0 16px 64px rgba(0, 0, 0, 0.12),
+      0 4px 16px rgba(255, 255, 255, 0.6) inset,
+      0 -4px 12px rgba(0, 0, 0, 0.05) inset,
+      0 0 0 1.5px rgba(255, 255, 255, 0.5) inset,
+      0 8px 32px rgba(255, 255, 255, 0.4);
   }
 
   .spring-transition {
@@ -194,5 +207,64 @@ body {
       radial-gradient(at 20% 20%, rgba(232, 180, 184, 0.4) 0px, transparent 50%),
       radial-gradient(at 80% 80%, rgba(168, 197, 180, 0.4) 0px, transparent 50%),
       radial-gradient(at 40% 60%, rgba(245, 241, 237, 0.6) 0px, transparent 50%);
+  }
+
+  /* Premium card effects */
+  .card-hover-effect {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card-hover-effect:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.12),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Subtle texture overlay */
+  .texture-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* VisionOS-style liquid effects */
+  .liquid-glow {
+    box-shadow:
+      0 0 40px rgba(255, 255, 255, 0.2),
+      0 0 80px rgba(255, 255, 255, 0.1),
+      inset 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+
+  .liquid-border {
+    border: 2px solid;
+    border-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.8)
+    ) 1;
+  }
+
+  /* Jelly effect on hover */
+  @keyframes jelly {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.02, 0.98); }
+    50% { transform: scale(0.98, 1.02); }
+    75% { transform: scale(1.01, 0.99); }
+  }
+
+  .jelly-hover:hover {
+    animation: jelly 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
