@@ -1,143 +1,194 @@
-import * as React from "react"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+'use client';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 interface LiquidGlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  glowIntensity?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
-  shadowIntensity?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
-  blurIntensity?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
-  borderRadius?: string
-  draggable?: boolean
-  expandable?: boolean
-  children: React.ReactNode
+  children: React.ReactNode;
+  className?: string;
+  draggable?: boolean;
+  expandable?: boolean;
+  width?: string;
+  height?: string;
+  expandedWidth?: string;
+  expandedHeight?: string;
+  blurIntensity?: 'sm' | 'md' | 'lg' | 'xl';
+  borderRadius?: string;
+  glowIntensity?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  shadowIntensity?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
-const glowStyles = {
-  none: "",
-  xs: "shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]",
-  sm: "shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:shadow-[0_0_35px_rgba(255,255,255,0.2)]",
-  md: "shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.25)]",
-  lg: "shadow-[0_0_60px_rgba(255,255,255,0.25)] hover:shadow-[0_0_80px_rgba(255,255,255,0.3)]",
-  xl: "shadow-[0_0_80px_rgba(255,255,255,0.3)] hover:shadow-[0_0_100px_rgba(255,255,255,0.35)]",
-}
+export const LiquidGlassCard: React.FC<LiquidGlassCardProps> = ({
+  children,
+  className = '',
+  draggable = true,
+  expandable = false,
+  width,
+  height,
+  expandedWidth,
+  expandedHeight,
+  blurIntensity = 'xl',
+  borderRadius = '32px',
+  glowIntensity = 'sm',
+  shadowIntensity = 'md',
+  ...props
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-const shadowStyles = {
-  none: "",
-  xs: "shadow-glass",
-  sm: "shadow-glass",
-  md: "shadow-glass",
-  lg: "shadow-glass-elevated",
-  xl: "shadow-glass-elevated",
-}
+  const handleToggleExpansion = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!expandable) return;
+    if ((e.target as HTMLElement).closest('a, button, input, select, textarea')) return;
+    setIsExpanded(!isExpanded);
+  };
 
-const blurStyles = {
-  none: "",
-  xs: "[backdrop-filter:blur(20px)_saturate(140%)_brightness(1.05)] [-webkit-backdrop-filter:blur(20px)_saturate(140%)_brightness(1.05)]",
-  sm: "[backdrop-filter:blur(40px)_saturate(160%)_brightness(1.1)] [-webkit-backdrop-filter:blur(40px)_saturate(160%)_brightness(1.1)]",
-  md: "[backdrop-filter:blur(60px)_saturate(180%)_brightness(1.15)] [-webkit-backdrop-filter:blur(60px)_saturate(180%)_brightness(1.15)]",
-  lg: "[backdrop-filter:blur(80px)_saturate(200%)_brightness(1.2)] [-webkit-backdrop-filter:blur(80px)_saturate(200%)_brightness(1.2)]",
-  xl: "[backdrop-filter:blur(100px)_sate(220%)_brightness(1.25)] [-webkit-backdrop-filter:blur(100px)_saturate(220%)_brightness(1.25)]",
-}
+  const blurClasses = {
+    sm: 'backdrop-blur-xs',
+    md: 'backdrop-blur-md',
+    lg: 'backdrop-blur-lg',
+    xl: 'backdrop-blur-xl',
+  };
 
-export const LiquidGlassCard = React.forwardRef<HTMLDivElement, LiquidGlassCardProps>(
-  ({
-    className,
-    children,
-    glowIntensity = "none",
-    shadowIntensity = "xs",
-    blurIntensity = "xs",
-    borderRadius = "24px",
-    draggable = false,
-    expandable = false,
-    style,
-    ...props
-  }, ref) => {
-    const [isExpanded, setIsExpanded] = React.useState(false)
+  const shadowStyles = {
+    none: 'inset 0 0 0 0 rgba(255, 255, 255, 0)',
+    xs: 'inset 1px 1px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -1px 1px 0 rgba(255, 255, 255, 0.3)',
+    sm: 'inset 2px 2px 2px 0 rgba(255, 255, 255, 0.35), inset -2px -2px 2px 0 rgba(255, 255, 255, 0.35)',
+    md: 'inset 3px 3px 3px 0 rgba(255, 255, 255, 0.45), inset -3px -3px 3px 0 rgba(255, 255, 255, 0.45)',
+    lg: 'inset 4px 4px 4px 0 rgba(255, 255, 255, 0.5), inset -4px -4px 4px 0 rgba(255, 255, 255, 0.5)',
+    xl: 'inset 6px 6px 6px 0 rgba(255, 255, 255, 0.55), inset -6px -6px 6px 0 rgba(255, 255, 255, 0.55)',
+    '2xl':
+      'inset 8px 8px 8px 0 rgba(255, 255, 255, 0.6), inset -8px -8px 8px 0 rgba(255, 255, 255, 0.6)',
+  };
 
-    const Component = draggable || expandable ? motion.div : 'div'
-    const motionProps = draggable
+  const glowStyles = {
+    none: '0 4px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(0, 0, 0, 0.05)',
+    xs: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 16px rgba(255, 255, 255, 0.05)',
+    sm: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 24px rgba(255, 255, 255, 0.1)',
+    md: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 32px rgba(255, 255, 255, 0.15)',
+    lg: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 40px rgba(255, 255, 255, 0.2)',
+    xl: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 48px rgba(255, 255, 255, 0.25)',
+    '2xl':
+      '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 60px rgba(255, 255, 255, 0.3)',
+  };
+
+  const containerVariants = expandable
+    ? {
+        collapsed: {
+          width: width || 'auto',
+          height: height || 'auto',
+          transition: {
+            duration: 0.4,
+            ease: [0.5, 1.5, 0.5, 1],
+          },
+        },
+        expanded: {
+          width: expandedWidth || 'auto',
+          height: expandedHeight || 'auto',
+          transition: {
+            duration: 0.4,
+            ease: [0.5, 1.5, 0.5, 1],
+          },
+        },
+      }
+    : {};
+
+  const MotionComponent = draggable || expandable ? motion.div : 'div';
+  const motionProps =
+    draggable || expandable
       ? {
-          drag: true,
-          dragConstraints: { left: 0, right: 0, top: 0, bottom: 0 },
-          dragElastic: 0.1,
+          variants: expandable ? containerVariants : undefined,
+          animate: expandable
+            ? isExpanded
+              ? 'expanded'
+              : 'collapsed'
+            : undefined,
+          onClick: expandable ? handleToggleExpansion : undefined,
+          drag: draggable,
+          dragConstraints: draggable
+            ? { left: 0, right: 0, top: 0, bottom: 0 }
+            : undefined,
+          dragElastic: draggable ? 0.3 : undefined,
+          dragTransition: draggable
+            ? {
+                bounceStiffness: 300,
+                bounceDamping: 10,
+                power: 0.3,
+              }
+            : undefined,
+          whileDrag: draggable ? { scale: 1.02 } : undefined,
+          whileHover: { scale: 1.01 },
           whileTap: { scale: 0.98 },
         }
-      : expandable
-      ? {
-          animate: isExpanded ? { scale: 1.05 } : { scale: 1 },
-          transition: { type: "spring", stiffness: 300, damping: 30 },
-        }
-      : {}
+      : {};
 
-    return (
-      <Component
-        ref={ref}
+  return (
+    <>
+      <svg className="hidden">
+        <defs>
+          <filter
+            id="glass-blur"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            filterUnits="objectBoundingBox"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.003 0.007"
+              numOctaves="1"
+              result="turbulence"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="turbulence"
+              scale="200"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+      <MotionComponent
         className={cn(
-          // Base styles
-          "relative overflow-hidden border",
-          "border-white/30 bg-white/70",
-          "transition-all duration-300 ease-out",
-          // Apply intensity-based styles
-          glowStyles[glowIntensity],
-          shadowStyles[shadowIntensity],
-          blurStyles[blurIntensity],
-          draggable && "cursor-grab active:cursor-grabbing",
+          `relative ${draggable ? 'cursor-grab active:cursor-grabbing' : ''} ${expandable ? 'cursor-pointer' : ''}`,
           className
         )}
         style={{
           borderRadius,
-          ...style
+          ...(width && !expandable && { width }),
+          ...(height && !expandable && { height }),
         }}
         {...motionProps}
         {...props}
       >
-        {/* Edge layer - inner highlights */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent pointer-events-none"
-          style={{ borderRadius }}
+          className={`absolute inset-0 ${blurClasses[blurIntensity]} z-0`}
+          style={{
+            borderRadius,
+            filter: 'url(#glass-blur)',
+          }}
         />
 
-        {/* Subtle inner glow */}
         <div
-          className="absolute inset-0 shadow-[inset_0_1px_8px_rgba(255,255,255,0.2),inset_0_-1px_4px_rgba(0,0,0,0.05)] pointer-events-none"
-          style={{ borderRadius }}
+          className="absolute inset-0 z-10"
+          style={{
+            borderRadius,
+            boxShadow: glowStyles[glowIntensity],
+          }}
         />
 
-        {/* Content */}
+        <div
+          className="absolute inset-0 z-20"
+          style={{
+            borderRadius,
+            boxShadow: shadowStyles[shadowIntensity],
+          }}
+        />
+
         <div className="relative z-30">
           {children}
         </div>
-      </Component>
-    )
-  }
-)
-
-LiquidGlassCard.displayName = "LiquidGlassCard"
-
-// Variants with preset configurations
-export const LiquidGlassCardSubtle = React.forwardRef<HTMLDivElement, Omit<LiquidGlassCardProps, 'glowIntensity' | 'shadowIntensity' | 'blurIntensity'>>(
-  (props, ref) => (
-    <LiquidGlassCard
-      ref={ref}
-      glowIntensity="sm"
-      shadowIntensity="sm"
-      blurIntensity="sm"
-      {...props}
-    />
-  )
-)
-LiquidGlassCardSubtle.displayName = "LiquidGlassCardSubtle"
-
-export const LiquidGlassCardElevated = React.forwardRef<HTMLDivElement, Omit<LiquidGlassCardProps, 'glowIntensity' | 'shadowIntensity' | 'blurIntensity'>>(
-  (props, ref) => (
-    <LiquidGlassCard
-      ref={ref}
-      glowIntensity="lg"
-      shadowIntensity="lg"
-      blurIntensity="lg"
-      borderRadius="32px"
-      {...props}
-    />
-  )
-)
-LiquidGlassCardElevated.displayName = "LiquidGlassCardElevated"
+      </MotionComponent>
+    </>
+  );
+};

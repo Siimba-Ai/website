@@ -19,41 +19,48 @@ const SidebarMenuGlassy = ({className}:{className?:string}) => {
             'url("https://images.unsplash.com/photo-1752440093057-1c188e7137e9?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center / cover no-repeat',
         }}
       >
-        <LiquidGlassCard glowIntensity="sm" shadowIntensity="lg" borderRadius="24px" blurIntensity="sm" draggable className='p-4 w-[280px] bg-white/20'>
-          <nav className='space-y-2 w-full relative z-30 '>
+        <LiquidGlassCard
+          glowIntensity="lg"
+          shadowIntensity="xl"
+          borderRadius="24px"
+          blurIntensity="xl"
+          draggable
+          className="w-[280px]"
+        >
+          <nav className="space-y-2 w-full relative z-30 p-4">
             <button
-              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/30 bg-white/40 text-gray-800 hover:bg-white/50 backdrop-blur-lg'
-              aria-current='page'
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/40 bg-white/30 text-white backdrop-blur-md"
+              aria-current="page"
             >
-              <Home className='w-5 h-5' />
+              <Home className="w-5 h-5" />
               <span>Dashboard</span>
             </button>
 
             <button
-              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-lg'
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
             >
-              <Search className='w-5 h-5' />
+              <Search className="w-5 h-5" />
               <span>Search</span>
             </button>
 
             <button
-              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-lg'
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
             >
-              <BarChart2 className='w-5 h-5' />
+              <BarChart2 className="w-5 h-5" />
               <span>Sales Analytics</span>
             </button>
 
             <button
-              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-lg'
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
             >
-              <Bell className='w-5 h-5' />
+              <Bell className="w-5 h-5" />
               <span>Notification</span>
             </button>
 
             <button
-              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-lg'
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
             >
-              <Settings className='w-5 h-5' />
+              <Settings className="w-5 h-5" />
               <span>Account Settings</span>
             </button>
           </nav>

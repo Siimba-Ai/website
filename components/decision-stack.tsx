@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { trackEvents } from "@/lib/analytics"
-import { LiquidGlassCard, LiquidGlassCardElevated } from "@/components/ui/liquid-glass"
+import { LiquidGlassCard } from "@/components/ui/liquid-glass"
 
 export interface DecisionCard {
   id: string
@@ -117,7 +117,8 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
 
   return (
     <div className={cn("relative w-full", className)}>
-      <LiquidGlassCardElevated className="p-10 md:p-12 relative">
+      <LiquidGlassCard glowIntensity="xl" shadowIntensity="2xl" blurIntensity="xl" >
+        <div className="p-10 md:p-12 relative">
         <div className="relative h-[500px] md:h-[540px] lg:h-[580px]">
         {/* Stack preview (cards behind) */}
         {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
@@ -194,7 +195,8 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
             />
           ))}
         </div>
-      </LiquidGlassCardElevated>
+        </div>
+      </LiquidGlassCard>
     </div>
   )
 }
