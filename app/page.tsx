@@ -97,30 +97,27 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 w-full overflow-x-hidden">
+    <main className="min-h-screen w-full overflow-x-hidden">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative w-full pt-32 md:pt-40 lg:pt-48 pb-16 md:pb-20 lg:pb-24">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/60 via-white to-white" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-50 to-transparent -z-10" />
+      <section className="relative w-full pt-24 md:pt-32 lg:pt-36 pb-12 md:pb-16 lg:pb-20">
         <FloatingBlobs />
-        
+
         <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* Left: Copy */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="space-y-6"
             >
               <Badge>Early Access</Badge>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-900 leading-[1.05] tracking-tight">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-charcoal leading-[1.05] tracking-tight">
                 You wake up. You swipe yes 4 times. Your day is handled.
               </h1>
-              <p className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground leading-relaxed max-w-4xl">
+              <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal/70 leading-relaxed max-w-4xl">
                 Siimba prepares a small stack of decisions every morning. You approve, not juggle. Reduce decision fatigue and start your day staged.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -153,7 +150,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.2 }}
               className="w-full"
             >
               <DecisionStack
@@ -168,28 +165,28 @@ export default function Home() {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section id="waitlist" className="w-full py-20">
         <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20 max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left side: Text */}
               <div className="text-left">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-900 mb-6">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-charcoal mb-6">
                   Get early access
                 </h2>
-                <p className="text-2xl md:text-3xl lg:text-4xl text-gray-600">
+                <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal/70">
                   Join the waitlist. We'll email you when the demo is ready.
                 </p>
               </div>
-              
+
               {/* Right side: Form */}
               <div>
-                <Card>
+                <Card className="glass-card">
                   <CardContent className="pt-8 pb-8">
                     <WaitlistForm />
                   </CardContent>
@@ -201,19 +198,19 @@ export default function Home() {
       </section>
 
       {/* How it Works Section */}
-      <section id="how-it-works" className="w-full py-20 bg-white">
+      <section id="how-it-works" className="w-full py-20">
         <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal mb-4">
               How it works
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/70 max-w-4xl mx-auto">
               Siimba follows a simple review and approve model. You stay in control while reducing cognitive load.
             </p>
           </motion.div>
@@ -241,17 +238,17 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30, delay: idx * 0.1 }}
               >
-                <Card>
+                <Card className="glass-card">
                   <CardHeader>
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-sage/20 text-sage">
                       {step.icon}
                     </div>
                     <CardTitle className="text-2xl md:text-3xl">{step.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{step.description}</p>
+                    <p className="text-xl md:text-2xl text-charcoal/70">{step.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -262,12 +259,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.4 }}
             className="mt-12 text-center"
           >
-            <Card className="mx-auto max-w-3xl border-primary/20 bg-blue-50">
+            <Card className="mx-auto max-w-3xl glass-card-green">
               <CardContent className="pt-6">
-                <p className="text-xl md:text-2xl text-gray-700">
+                <p className="text-xl md:text-2xl text-charcoal">
                   <strong>Proactive but bounded.</strong> Siimba suggests and drafts, but never acts without your approval. It reduces decision fatigue, not critical thinking.
                 </p>
               </CardContent>
@@ -536,10 +533,11 @@ function FloatingBlobs() {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <motion.div
-        className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-blue-200/30 blur-3xl"
+        className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink/40 blur-3xl"
         animate={{
           x: [0, 30, 0],
           y: [0, 50, 0],
+          scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 20,
@@ -548,13 +546,27 @@ function FloatingBlobs() {
         }}
       />
       <motion.div
-        className="absolute -right-32 top-64 h-96 w-96 rounded-full bg-purple-200/20 blur-3xl"
+        className="absolute right-0 top-32 h-[600px] w-[600px] rounded-full bg-sage/35 blur-3xl"
         animate={{
           x: [0, -40, 0],
           y: [0, 60, 0],
+          scale: [1, 1.15, 1],
         }}
         transition={{
           duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute left-1/2 bottom-0 h-[500px] w-[500px] rounded-full bg-beige/50 blur-3xl"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 30,
           repeat: Infinity,
           ease: "easeInOut",
         }}

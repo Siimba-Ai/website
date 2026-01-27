@@ -71,36 +71,36 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
   const getTypeColor = (type: DecisionCard["type"]) => {
     switch (type) {
       case "calendar":
-        return "bg-blue-100 text-blue-700"
+        return "bg-sage/30 text-charcoal border border-sage/40"
       case "email":
-        return "bg-purple-100 text-purple-700"
+        return "bg-pink/30 text-charcoal border border-pink/40"
       case "errand":
-        return "bg-green-100 text-green-700"
+        return "bg-sage/40 text-charcoal border border-sage/50"
       case "social":
-        return "bg-pink-100 text-pink-700"
+        return "bg-pink/40 text-charcoal border border-pink/50"
       case "task":
-        return "bg-amber-100 text-amber-700"
+        return "bg-beige/60 text-charcoal border border-beige"
       default:
-        return "bg-gray-100 text-gray-700"
+        return "bg-white/40 text-charcoal border border-white/50"
     }
   }
 
   if (isComplete) {
     return (
       <div className={cn("relative w-full", className)}>
-        <Card className="relative overflow-hidden bg-gradient-to-br from-green-50 to-blue-50 p-8 md:p-10 text-center">
+        <Card className="relative overflow-hidden glass-card-green p-8 md:p-10 text-center">
           {showConfetti && <Confetti />}
           <div className="relative z-10">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-              <Check className="h-8 w-8 text-green-600" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-sage/20">
+              <Check className="h-8 w-8 text-sage" />
             </div>
-            <h3 className="mb-2 text-2xl font-bold text-gray-900">
+            <h3 className="mb-2 text-2xl font-bold text-charcoal">
               Done. Your day is staged.
             </h3>
-            <p className="mb-4 text-base text-gray-600">
+            <p className="mb-4 text-base text-charcoal/70">
               {approvalCount} approved, {snoozeCount} snoozed
             </p>
-            <Button onClick={handleReset} variant="outline" className="gap-2">
+            <Button onClick={handleReset} variant="outline" className="gap-2 spring-transition">
               <RotateCcw className="h-4 w-4" />
               Reset demo
             </Button>
@@ -112,8 +112,8 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
 
   return (
     <div className={cn("relative w-full", className)}>
-      <div className="rounded-3xl bg-gradient-to-br from-white to-blue-50/30 border border-gray-200/50 shadow-2xl p-6 md:p-8">
-        <div className="relative h-[480px] md:h-[520px] lg:h-[560px]">
+      <div className="rounded-[32px] glass-elevated p-8 md:p-10 shadow-2xl">
+        <div className="relative h-[500px] md:h-[540px] lg:h-[580px]">
         {/* Stack preview (cards behind) */}
         {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
           <div
@@ -125,7 +125,7 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
               opacity: 1 - (idx + 1) * 0.3,
             }}
           >
-            <Card className="h-full bg-white shadow-md" />
+            <Card className="h-full glass-card" />
           </div>
         ))}
 
@@ -146,7 +146,7 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
           onClick={handleSnooze}
           variant="outline"
           size="lg"
-          className="gap-2 flex-1 sm:flex-none"
+          className="gap-2 flex-1 sm:flex-none spring-transition hover:scale-105"
           aria-label="Snooze this decision"
         >
           <X className="h-5 w-5" />
@@ -155,7 +155,7 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
         <Button
           onClick={handleApprove}
           size="lg"
-          className="gap-2 flex-1 sm:flex-none"
+          className="gap-2 flex-1 sm:flex-none spring-transition hover:scale-105"
           aria-label="Approve this decision"
         >
           <Check className="h-5 w-5" />
@@ -217,21 +217,22 @@ function SwipeableCard({
       onDragEnd={handleDragEnd}
       dragElastic={0.7}
       whileTap={{ cursor: "grabbing" }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <Card className="h-full bg-white p-6 md:p-7 shadow-xl">
+      <Card className="h-full glass-card p-7 md:p-8 shadow-xl">
         <div className="flex h-full flex-col">
           <div className="flex items-start justify-between mb-4">
-            <Badge className={cn(getTypeColor(card.type), "text-xs font-medium")}>{card.type}</Badge>
-            <Sparkles className="h-5 w-5 text-primary/30 flex-shrink-0" />
+            <Badge className={cn(getTypeColor(card.type), "text-xs font-medium backdrop-blur-md")}>{card.type}</Badge>
+            <Sparkles className="h-5 w-5 text-sage/40 flex-shrink-0" />
           </div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-3">{card.title}</h3>
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">{card.summary}</p>
+          <h3 className="text-xl md:text-2xl font-bold text-charcoal leading-tight mb-3">{card.title}</h3>
+          <p className="text-sm md:text-base text-charcoal/70 leading-relaxed mb-4">{card.summary}</p>
 
           <div className="mt-auto">
-            <p className="text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Prepared</p>
-            <div className="rounded-lg bg-gray-50 p-4 md:p-5">
-              <p className="text-sm md:text-base text-gray-700 leading-relaxed">{card.detail}</p>
+            <p className="text-xs uppercase tracking-wider text-charcoal/40 font-medium mb-2">Prepared</p>
+            <div className="rounded-2xl glass-card-green p-4 md:p-5 border border-sage/20">
+              <p className="text-sm md:text-base text-charcoal/80 leading-relaxed">{card.detail}</p>
             </div>
           </div>
         </div>

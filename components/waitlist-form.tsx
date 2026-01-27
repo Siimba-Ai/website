@@ -106,14 +106,14 @@ export function WaitlistForm() {
 
   if (isSuccess) {
     return (
-      <div className="rounded-lg border-2 border-green-200 bg-green-50 p-10 text-center">
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-          <Check className="h-8 w-8 text-green-600" />
+      <div className="rounded-[24px] glass-card-green p-10 text-center border border-sage/30">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sage/30 backdrop-blur-md">
+          <Check className="h-8 w-8 text-sage" />
         </div>
-        <h3 className="mb-4 text-3xl md:text-4xl font-bold text-gray-900">
+        <h3 className="mb-4 text-3xl md:text-4xl font-bold text-charcoal">
           You&apos;re on the list!
         </h3>
-        <p className="mb-6 text-xl md:text-2xl text-gray-600">
+        <p className="mb-6 text-xl md:text-2xl text-charcoal/70">
           We&apos;ll email you when the demo is ready. No spam.
         </p>
         <Button
@@ -133,7 +133,7 @@ export function WaitlistForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <label htmlFor="email" className="mb-3 block text-xl md:text-2xl font-medium text-gray-700">
+        <label htmlFor="email" className="mb-3 block text-xl md:text-2xl font-semibold text-charcoal">
           Email address
         </label>
         <Input
@@ -143,18 +143,18 @@ export function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isSubmitting}
-          className="w-full h-14 text-lg md:text-xl px-4"
+          className="w-full text-lg md:text-xl"
           aria-describedby={error ? "email-error" : undefined}
         />
         {error && (
-          <p id="email-error" className="mt-2 text-base md:text-lg text-red-600">
+          <p id="email-error" className="mt-2 text-base md:text-lg text-pink font-medium">
             {error}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor="category" className="mb-3 block text-xl md:text-2xl font-medium text-gray-700">
+        <label htmlFor="category" className="mb-3 block text-xl md:text-2xl font-semibold text-charcoal">
           I&apos;m using Siimba for:
         </label>
         <select
@@ -162,7 +162,7 @@ export function WaitlistForm() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           disabled={isSubmitting}
-          className="flex h-14 w-full rounded-md border border-input bg-background px-4 py-2 text-lg md:text-xl ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-14 w-full rounded-2xl border border-charcoal/20 glass-card px-4 py-3 text-lg md:text-xl text-charcoal spring-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {categories.map((cat) => (
             <option key={cat.value} value={cat.value}>
@@ -179,9 +179,9 @@ export function WaitlistForm() {
           checked={interview}
           onChange={(e) => setInterview(e.target.checked)}
           disabled={isSubmitting}
-          className="mt-1 h-5 w-5 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary"
+          className="mt-1 h-5 w-5 rounded border-sage/30 text-sage focus:ring-2 focus:ring-sage spring-transition"
         />
-        <label htmlFor="interview" className="text-lg md:text-xl text-gray-700">
+        <label htmlFor="interview" className="text-lg md:text-xl text-charcoal/80">
           I&apos;m open to a 15-min user interview
         </label>
       </div>
@@ -190,7 +190,7 @@ export function WaitlistForm() {
         type="submit"
         size="lg"
         disabled={isSubmitting}
-        className="w-full h-14 text-xl md:text-2xl"
+        className="w-full h-14 text-xl md:text-2xl shadow-lg hover:shadow-xl"
       >
         {isSubmitting ? (
           <>
@@ -202,7 +202,7 @@ export function WaitlistForm() {
         )}
       </Button>
 
-      <p className="text-center text-base md:text-lg text-gray-500">
+      <p className="text-center text-base md:text-lg text-charcoal/60">
         No spam. We email when the demo is ready.
       </p>
 
@@ -211,7 +211,7 @@ export function WaitlistForm() {
           href={calendlyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-lg md:text-xl font-medium text-primary hover:underline"
+          className="text-lg md:text-xl font-semibold text-sage hover:text-sage/80 spring-transition"
         >
           Or book a call to learn more →
         </a>

@@ -62,6 +62,18 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        pink: '#E8B4B8',
+        sage: '#A8C5B4',
+        beige: '#F5F1ED',
+        charcoal: '#4A5759',
+      },
+      fontFamily: {
+        sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+      },
+      transitionTimingFunction: {
+        'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'smooth-out': 'cubic-bezier(0.4, 0.0, 1, 1)',
+        'smooth-in': 'cubic-bezier(0.0, 0.0, 0.2, 1)',
       },
       borderRadius: {
         lg: 'var(--radius)',
