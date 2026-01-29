@@ -101,13 +101,13 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative w-full pt-32 md:pt-40 lg:pt-48 pb-16 md:pb-20 lg:pb-24">
+      <section className="relative w-full pt-24 sm:pt-28 md:pt-40 lg:pt-48 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
         {/* Subtle gradient background */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/60 via-white to-white" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-50 to-transparent -z-10" />
         <FloatingBlobs />
         
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left: Copy */}
             <motion.div
@@ -117,10 +117,10 @@ export default function Home() {
               className="space-y-6"
             >
               <Badge>Early Access</Badge>
-              <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-900 leading-[1.05] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-900 leading-[1.05] tracking-tight">
                 You wake up. You swipe yes 4 times. Your day is handled.
               </h1>
-              <p className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground leading-relaxed max-w-4xl">
+              <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-muted-foreground leading-relaxed max-w-4xl">
                 Siimba prepares a small stack of decisions every morning. You approve, not juggle. Reduce decision fatigue and start your day staged.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -179,10 +179,10 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left side: Text */}
               <div className="text-left">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-900 mb-6">
                   Get early access
                 </h2>
-                <p className="text-2xl md:text-3xl lg:text-4xl text-gray-600">
+                <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-gray-600">
                   Join the waitlist. We&apos;ll email you when the demo is ready.
                 </p>
               </div>
@@ -202,7 +202,7 @@ export default function Home() {
 
       {/* How it Works Section */}
       <section id="how-it-works" className="w-full py-20 bg-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -281,7 +281,7 @@ export default function Home() {
       {/* ====== ARCHIVED SECTIONS (hidden for this version) ====== */}
       {/* Demo Section */}
       <section id="demo" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -316,7 +316,7 @@ export default function Home() {
 
       {/* Why Siimba Section */}
       <section id="why-siimba" className="w-full py-20 bg-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -410,7 +410,7 @@ export default function Home() {
 
       {/* Security Section */}
       <section id="security" className="w-full py-20 bg-gray-50">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -491,7 +491,7 @@ export default function Home() {
 
       {/* FAQ Section */}
       <section id="faq" className="w-full py-20 bg-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2000px] mx-auto">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2000px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

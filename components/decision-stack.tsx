@@ -113,7 +113,7 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
   return (
     <div className={cn("relative w-full", className)}>
       <div className="rounded-3xl bg-gradient-to-br from-white to-blue-50/30 border border-gray-200/50 shadow-2xl p-6 md:p-8">
-        <div className="relative h-[480px] md:h-[520px] lg:h-[560px]">
+        <div className="relative h-[400px] sm:h-[450px] md:h-[520px] lg:h-[560px]">
         {/* Stack preview (cards behind) */}
         {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
           <div
