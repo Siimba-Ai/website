@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { trackEvents } from "@/lib/analytics"
+import { LiquidGlassCard, LiquidGlassCardElevated } from "@/components/ui/liquid-glass"
 
 export interface DecisionCard {
   id: string
@@ -71,61 +72,96 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
   const getTypeColor = (type: DecisionCard["type"]) => {
     switch (type) {
       case "calendar":
-        return "bg-blue-100 text-blue-700"
+        return "bg-sage/30 text-charcoal border border-sage/40"
       case "email":
-        return "bg-purple-100 text-purple-700"
+        return "bg-pink/30 text-charcoal border border-pink/40"
       case "errand":
-        return "bg-green-100 text-green-700"
+        return "bg-sage/40 text-charcoal border border-sage/50"
       case "social":
-        return "bg-pink-100 text-pink-700"
+        return "bg-pink/40 text-charcoal border border-pink/50"
       case "task":
-        return "bg-amber-100 text-amber-700"
+        return "bg-beige/60 text-charcoal border border-beige"
       default:
-        return "bg-gray-100 text-gray-700"
+        return "bg-white/40 text-charcoal border border-white/50"
     }
   }
 
   if (isComplete) {
     return (
       <div className={cn("relative w-full", className)}>
-        <Card className="relative overflow-hidden bg-gradient-to-br from-green-50 to-blue-50 p-8 md:p-10 text-center">
+        <LiquidGlassCardElevated className="relative overflow-hidden p-10 md:p-12 text-center border-2 border-sage/40 shadow-[0_8px_64px_rgba(168,197,180,0.2)]">
           {showConfetti && <Confetti />}
+
+          {/* Magical glow orbs */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-sage/10 rounded-full blur-3xl" />
+
           <div className="relative z-10">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-              <Check className="h-8 w-8 text-green-600" />
-            </div>
-            <h3 className="mb-2 text-2xl font-bold text-gray-900">
+            <LiquidGlassCard
+              glowIntensity="md"
+              shadowIntensity="lg"
+              blurIntensity="md"
+              borderRadius="24px"
+              className="mx-auto mb-6 flex h-20 w-20 items-center justify-center border-2 border-sage/40"
+            >
+              <Check className="h-10 w-10 text-sage" />
+            </LiquidGlassCard>
+            <h3 className="mb-3 text-3xl md:text-4xl font-bold text-charcoal">
               Done. Your day is staged.
             </h3>
-            <p className="mb-4 text-base text-gray-600">
+            <p className="mb-6 text-lg md:text-xl text-charcoal/60 font-medium">
               {approvalCount} approved, {snoozeCount} snoozed
             </p>
-            <Button onClick={handleReset} variant="outline" className="gap-2">
-              <RotateCcw className="h-4 w-4" />
-              Reset demo
-            </Button>
+            <LiquidGlassCard
+              glowIntensity="sm"
+              shadowIntensity="md"
+              blurIntensity="md"
+              borderRadius="16px"
+              className="inline-flex cursor-pointer hover:shadow-[0_0_40px_rgba(168,197,180,0.2)] transition-all duration-300"
+              onClick={handleReset}
+            >
+              <div className="px-6 py-3 flex items-center gap-2">
+                <RotateCcw className="h-5 w-5 text-charcoal/70" />
+                <span className="font-medium text-charcoal/80">Reset demo</span>
+              </div>
+            </LiquidGlassCard>
           </div>
-        </Card>
+        </LiquidGlassCardElevated>
       </div>
     )
   }
 
   return (
     <div className={cn("relative w-full", className)}>
-      <div className="rounded-3xl bg-gradient-to-br from-white to-blue-50/30 border border-gray-200/50 shadow-2xl p-6 md:p-8">
-        <div className="relative h-[400px] sm:h-[450px] md:h-[520px] lg:h-[560px]">
-        {/* Stack preview (cards behind) */}
+      {/* Magical floating glow effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-10 left-10 w-64 h-64 bg-sage/8 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-10 w-56 h-56 bg-pink/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+      </div>
+
+      <LiquidGlassCardElevated className="p-10 md:p-12 relative shadow-[0_8px_80px_rgba(168,197,180,0.12),0_0_120px_rgba(255,255,255,0.08)]">
+        {/* Inner floating orbs */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-sage/5 rounded-full blur-2xl animate-pulse pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-40 h-40 bg-pink/5 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
+
+        <div className="relative h-[500px] md:h-[540px] lg:h-[580px]">
+        {/* Stack preview (cards behind) - clean scaling without rotation */}
         {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
           <div
             key={card.id}
-            className="absolute inset-0"
+            className="absolute inset-0 transition-all duration-500 ease-out"
             style={{
-              transform: `translateY(${(idx + 1) * 8}px) scale(${1 - (idx + 1) * 0.05})`,
+              transform: `translateY(${(idx + 1) * 10}px) scale(${1 - (idx + 1) * 0.04})`,
               zIndex: cards.length - currentIndex - idx - 1,
-              opacity: 1 - (idx + 1) * 0.3,
+              opacity: 1 - (idx + 1) * 0.25,
             }}
           >
-            <Card className="h-full bg-white shadow-md" />
+            <LiquidGlassCard
+              glowIntensity="sm"
+              shadowIntensity="md"
+              blurIntensity="sm"
+              borderRadius="28px"
+              className="h-full"
+            />
           </div>
         ))}
 
@@ -140,46 +176,58 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
         )}
         </div>
 
-        {/* Action buttons */}
-      <div className="mt-6 flex items-center justify-center gap-4">
-        <Button
+        {/* Glassy action buttons */}
+      <div className="mt-8 flex items-center justify-center gap-4">
+        <LiquidGlassCard
+          glowIntensity="sm"
+          shadowIntensity="md"
+          blurIntensity="md"
+          borderRadius="20px"
+          className="flex-1 sm:flex-none cursor-pointer group hover:shadow-[0_0_40px_rgba(232,180,184,0.15)] transition-all duration-300"
           onClick={handleSnooze}
-          variant="outline"
-          size="lg"
-          className="gap-2 flex-1 sm:flex-none"
-          aria-label="Snooze this decision"
         >
-          <X className="h-5 w-5" />
-          {cards[currentIndex]?.snoozeLabel || "Snooze"}
-        </Button>
-        <Button
+          <div className="px-6 py-3 flex items-center justify-center gap-2">
+            <X className="h-5 w-5 text-charcoal/70 group-hover:text-pink transition-colors duration-300" />
+            <span className="font-medium text-charcoal/80 group-hover:text-charcoal transition-colors duration-300">
+              {cards[currentIndex]?.snoozeLabel || "Snooze"}
+            </span>
+          </div>
+        </LiquidGlassCard>
+
+        <LiquidGlassCard
+          glowIntensity="md"
+          shadowIntensity="lg"
+          blurIntensity="md"
+          borderRadius="20px"
+          className="flex-1 sm:flex-none cursor-pointer group hover:shadow-[0_0_60px_rgba(168,197,180,0.25),0_0_100px_rgba(168,197,180,0.12)] transition-all duration-300 bg-gradient-to-br from-sage/15 to-sage/5"
           onClick={handleApprove}
-          size="lg"
-          className="gap-2 flex-1 sm:flex-none"
-          aria-label="Approve this decision"
         >
-          <Check className="h-5 w-5" />
-          {cards[currentIndex]?.approveLabel || "Approve"}
-        </Button>
+          <div className="px-6 py-3 flex items-center justify-center gap-2">
+            <Check className="h-5 w-5 text-sage group-hover:scale-110 transition-transform duration-300" />
+            <span className="font-semibold text-charcoal group-hover:text-charcoal/90 transition-colors duration-300">
+              {cards[currentIndex]?.approveLabel || "Approve"}
+            </span>
+          </div>
+        </LiquidGlassCard>
       </div>
 
-        {/* Progress indicator */}
-        <div className="mt-4 flex justify-center gap-2">
+        {/* Progress indicator with glassy effects */}
+        <div className="mt-6 flex justify-center gap-3">
           {cards.map((_, idx) => (
             <div
               key={idx}
               className={cn(
-                "h-2 w-2 rounded-full transition-colors",
+                "h-2 rounded-full transition-all duration-500 ease-out",
                 idx < currentIndex
-                  ? "bg-primary"
+                  ? "w-2 bg-sage shadow-lg shadow-sage/40"
                   : idx === currentIndex
-                  ? "bg-primary/50"
-                  : "bg-gray-200"
+                  ? "w-8 glass-card-green border border-sage/40"
+                  : "w-2 glass-card border border-white/40"
               )}
             />
           ))}
         </div>
-      </div>
+      </LiquidGlassCardElevated>
     </div>
   )
 }
@@ -198,7 +246,7 @@ function SwipeableCard({
   getTypeColor,
 }: SwipeableCardProps) {
   const x = useMotionValue(0)
-  const rotate = useTransform(x, [-200, 200], [-25, 25])
+  // Removed rotate for clean, non-wiggly movement
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0])
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -211,67 +259,95 @@ function SwipeableCard({
   return (
     <motion.div
       className="absolute inset-0 cursor-grab active:cursor-grabbing"
-      style={{ x, rotate, opacity, zIndex: 100 }}
+      style={{ x, opacity, zIndex: 100 }}
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
-      dragElastic={0.7}
+      dragElastic={0.5}
       whileTap={{ cursor: "grabbing" }}
+      transition={{ type: "spring", stiffness: 400, damping: 40 }}
     >
-      <Card className="h-full bg-white p-6 md:p-7 shadow-xl">
+      <LiquidGlassCard
+        glowIntensity="lg"
+        shadowIntensity="lg"
+        blurIntensity="md"
+        borderRadius="28px"
+        className="h-full p-8 md:p-9"
+      >
         <div className="flex h-full flex-col">
-          <div className="flex items-start justify-between mb-4">
-            <Badge className={cn(getTypeColor(card.type), "text-xs font-medium")}>{card.type}</Badge>
-            <Sparkles className="h-5 w-5 text-primary/30 flex-shrink-0" />
+          <div className="flex items-start justify-between mb-5">
+            <Badge className={cn(getTypeColor(card.type), "text-xs font-medium backdrop-blur-xl shadow-lg")}>{card.type}</Badge>
+            <div className="p-2 rounded-full bg-white/20 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 text-sage/60 flex-shrink-0" />
+            </div>
           </div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-3">{card.title}</h3>
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">{card.summary}</p>
+          <h3 className="text-xl md:text-2xl font-bold text-charcoal leading-tight mb-4">{card.title}</h3>
+          <p className="text-base md:text-lg text-charcoal/70 leading-relaxed mb-5">{card.summary}</p>
 
           <div className="mt-auto">
-            <p className="text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Prepared</p>
-            <div className="rounded-lg bg-gray-50 p-4 md:p-5">
-              <p className="text-sm md:text-base text-gray-700 leading-relaxed">{card.detail}</p>
-            </div>
+            <p className="text-xs uppercase tracking-widest text-charcoal/40 font-semibold mb-3 flex items-center gap-2">
+              <span className="w-4 h-0.5 bg-sage/30 rounded-full" />
+              Prepared
+            </p>
+            <LiquidGlassCard
+              glowIntensity="sm"
+              shadowIntensity="sm"
+              blurIntensity="sm"
+              borderRadius="20px"
+              className="p-5 md:p-6 bg-gradient-to-br from-sage/20 to-sage/5 border-sage/30"
+            >
+              <p className="text-sm md:text-base text-charcoal/80 leading-relaxed">{card.detail}</p>
+            </LiquidGlassCard>
           </div>
         </div>
 
-        {/* Swipe indicators */}
+        {/* Glassy swipe indicators */}
         <motion.div
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 rounded-full bg-red-500 p-2 sm:p-4 opacity-0"
+          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 rounded-[28px] p-3 sm:p-5 opacity-0"
           style={{
             opacity: useTransform(x, [-150, -50], [1, 0]),
+            background: "linear-gradient(135deg, rgba(232, 180, 184, 0.9) 0%, rgba(232, 180, 184, 0.7) 100%)",
+            backdropFilter: "blur(20px) saturate(180%)",
+            WebkitBackdropFilter: "blur(20px) saturate(180%)",
+            border: "2px solid rgba(232, 180, 184, 0.6)",
+            boxShadow: "0 8px 32px rgba(232, 180, 184, 0.4), inset 0 2px 8px rgba(255, 255, 255, 0.3), 0 0 40px rgba(232, 180, 184, 0.3)",
           }}
         >
-          <X className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+          <X className="h-6 w-6 sm:h-8 sm:w-8 text-white drop-shadow-lg" />
         </motion.div>
         <motion.div
-          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 rounded-full bg-green-500 p-2 sm:p-4 opacity-0"
+          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 rounded-[28px] p-3 sm:p-5 opacity-0"
           style={{
             opacity: useTransform(x, [50, 150], [0, 1]),
+            background: "linear-gradient(135deg, rgba(168, 197, 180, 0.9) 0%, rgba(168, 197, 180, 0.7) 100%)",
+            backdropFilter: "blur(20px) saturate(180%)",
+            WebkitBackdropFilter: "blur(20px) saturate(180%)",
+            border: "2px solid rgba(168, 197, 180, 0.6)",
+            boxShadow: "0 8px 32px rgba(168, 197, 180, 0.4), inset 0 2px 8px rgba(255, 255, 255, 0.3), 0 0 40px rgba(168, 197, 180, 0.3)",
           }}
         >
-          <Check className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+          <Check className="h-6 w-6 sm:h-8 sm:w-8 text-white drop-shadow-lg" />
         </motion.div>
-      </Card>
+      </LiquidGlassCard>
     </motion.div>
   )
 }
 
 function Confetti() {
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute h-3 w-3 rounded-full"
           style={{
             backgroundColor: [
-              "#3b82f6",
-              "#8b5cf6",
-              "#ec4899",
-              "#10b981",
-              "#f59e0b",
+              "#A8C5B4", // sage
+              "#E8B4B8", // pink
+              "#A8C5B4", // sage
+              "#E8B4B8", // pink
+              "#F7F7F7", // beige
             ][i % 5],
             left: `${Math.random() * 100}%`,
             top: -20,
