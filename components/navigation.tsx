@@ -27,18 +27,18 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-200",
+        "fixed top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-white/80 shadow-sm backdrop-blur-md"
+          ? "bg-background/80 border-b border-border/10"
           : "bg-transparent"
       )}
     >
       <div className="w-full px-6 lg:px-8 xl:px-20">
-        <div className="flex h-24 md:h-28 lg:h-32 items-center justify-between max-w-[2800px] mx-auto">
+        <div className="flex h-20 md:h-24 items-center justify-between max-w-[2800px] mx-auto">
           {/* Logo */}
           <a
             href="#"
-            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-primary"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground transition-opacity hover:opacity-70"
             onClick={(e) => {
               e.preventDefault()
               window.scrollTo({ top: 0, behavior: "smooth" })
@@ -48,7 +48,7 @@ export function Navigation() {
           </a>
 
           {/* CTA Button */}
-          <Button onClick={handleCTAClick} size="lg" className="text-xl md:text-2xl px-8 py-6">
+          <Button onClick={handleCTAClick} size="lg" className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 shadow-[0_0_20px_rgba(74,222,128,0.3),0_0_40px_rgba(74,222,128,0.15)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4),0_0_60px_rgba(74,222,128,0.2)] border-2">
             Get early access
           </Button>
         </div>

@@ -71,7 +71,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, { children: React.R
     return (
       <button
         ref={ref}
-        className={cn("flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline w-full text-left", className)}
+        className={cn("flex flex-1 items-center justify-between py-5 font-medium transition-all hover:opacity-70 w-full text-left", className)}
         onClick={handleClick}
       >
         {children}

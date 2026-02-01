@@ -3,30 +3,30 @@ import Link from "next/link"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-gray-50">
+    <footer className="border-t border-border/10 bg-background">
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Brand */}
           <div>
-            <h3 className="mb-2 text-xl font-bold text-primary">Siimba</h3>
-            <p className="text-sm text-gray-600">
+            <h3 className="mb-2 text-xl font-bold text-foreground">Siimba</h3>
+            <p className="text-sm text-muted-foreground">
               You wake up. You swipe yes 4 times. Your day is handled.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 font-semibold text-gray-900">Legal</h4>
+            <h4 className="mb-4 font-semibold text-foreground">Legal</h4>
             <div className="flex flex-col gap-2">
               <Link
                 href="/privacy"
-                className="text-sm text-gray-600 hover:text-primary"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
-                className="text-sm text-gray-600 hover:text-primary"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Terms of Service
               </Link>
@@ -35,13 +35,13 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="mb-4 font-semibold text-gray-900">Connect</h4>
+            <h4 className="mb-4 font-semibold text-foreground">Connect</h4>
             <div className="flex gap-4">
               <a
                 href="https://twitter.com/siimba"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary"
+                className="text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
@@ -50,7 +50,7 @@ export function Footer() {
                 href="https://linkedin.com/company/siimba"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary"
+                className="text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
@@ -59,7 +59,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-8 text-center text-sm text-gray-600">
+        <div className="mt-8 border-t border-border/10 pt-8 text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} Siimba. All rights reserved.
         </div>
       </div>

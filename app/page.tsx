@@ -97,36 +97,37 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 w-full overflow-x-hidden">
+    <main className="min-h-screen bg-background w-full overflow-x-hidden">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative w-full pt-24 sm:pt-28 md:pt-40 lg:pt-48 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50/60 via-white to-white" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-50 to-transparent -z-10" />
-        <FloatingBlobs />
+      <section className="relative w-full pt-32 sm:pt-36 md:pt-44 lg:pt-52 pb-20 sm:pb-24 md:pb-32 lg:pb-40">
+        {/* Subtle minimal graphic background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4ade8018_1px,transparent_1px),linear-gradient(to_bottom,#4ade8018_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+          <div className="absolute left-1/4 top-1/4 w-96 h-96 bg-green-200/20 rounded-full blur-3xl" />
+        </div>
         
         <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-[2400px] mx-auto">
             {/* Left: Copy */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-6"
+              className="space-y-8 text-left"
             >
               <Badge>Early Access</Badge>
-              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-900 leading-[1.05] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.05] tracking-tight max-w-[20ch]">
                 You wake up. You swipe yes 4 times. Your day is handled.
               </h1>
-              <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-muted-foreground leading-relaxed max-w-4xl">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed max-w-[58ch]">
                 Siimba prepares a small stack of decisions every morning. You approve, not juggle. Reduce decision fatigue and start your day staged.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
                   size="lg"
-                  className="text-xl md:text-2xl"
+                  className="text-base md:text-lg px-8 py-6"
                   onClick={() => {
                     trackEvents.ctaClick("hero-primary")
                     document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" })
@@ -138,7 +139,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="text-xl md:text-2xl"
+                  className="text-base md:text-lg px-8 py-6"
                   onClick={() => {
                     trackEvents.ctaClick("hero-secondary")
                     document.querySelector("#demo")?.scrollIntoView({ behavior: "smooth" })
@@ -168,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section id="waitlist" className="w-full py-24 md:py-32 section-divider">
         <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20 max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -176,13 +177,13 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Left side: Text */}
               <div className="text-left">
-                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
                   Get early access
                 </h2>
-                <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-gray-600">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed">
                   Join the waitlist. We&apos;ll email you when the demo is ready.
                 </p>
               </div>
@@ -201,24 +202,24 @@ export default function Home() {
       </section>
 
       {/* How it Works Section */}
-      <section id="how-it-works" className="w-full py-20 bg-white">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+      <section id="how-it-works" className="w-full py-24 md:py-32 section-divider">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
               How it works
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Siimba follows a simple review and approve model. You stay in control while reducing cognitive load.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: <Zap className="h-8 w-8" />,
@@ -243,15 +244,15 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
               >
-                <Card>
+                <Card className="h-full">
                   <CardHeader>
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded border border-border/40 text-foreground">
                       {step.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{step.title}</CardTitle>
+                    <CardTitle className="text-xl md:text-2xl text-foreground">{step.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{step.description}</p>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{step.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -263,11 +264,11 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <Card className="mx-auto max-w-3xl border-primary/20 bg-blue-50">
-              <CardContent className="pt-6">
-                <p className="text-xl md:text-2xl text-gray-700">
+            <Card className="mx-auto max-w-3xl border-border/30 bg-card/50">
+              <CardContent className="pt-6 pb-6">
+                <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
                   <strong>Proactive but bounded.</strong> Siimba suggests and drafts, but never acts without your approval. It reduces decision fatigue, not critical thinking.
                 </p>
               </CardContent>
@@ -280,19 +281,19 @@ export default function Home() {
         <>
       {/* ====== ARCHIVED SECTIONS (hidden for this version) ====== */}
       {/* Demo Section */}
-      <section id="demo" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+      <section id="demo" className="w-full py-24 md:py-32 section-divider">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
               Your day in 30 seconds
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Experience a typical morning with Siimba. Swipe through decisions and watch your day get staged.
             </p>
           </motion.div>
@@ -315,19 +316,19 @@ export default function Home() {
       </section>
 
       {/* Why Siimba Section */}
-      <section id="why-siimba" className="w-full py-20 bg-white">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+      <section id="why-siimba" className="w-full py-24 md:py-32 section-divider">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
               Why Siimba
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Built for people who think different. Designed for busy brains.
             </p>
           </motion.div>
@@ -372,15 +373,15 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.05 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full">
                   <CardHeader>
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded border border-border/40 text-foreground">
                       {feature.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{feature.title}</CardTitle>
+                    <CardTitle className="text-xl md:text-2xl text-foreground">{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{feature.description}</p>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -392,13 +393,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <Card className="mx-auto max-w-3xl border-purple-200 bg-purple-50">
-              <CardContent className="pt-6">
+            <Card className="mx-auto max-w-3xl border-border/30 bg-card/50">
+              <CardContent className="pt-6 pb-6">
                 <div className="flex items-start gap-3">
-                  <Users className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-gray-700 text-left">
+                  <Users className="h-5 w-5 text-foreground mt-0.5 flex-shrink-0" />
+                  <p className="text-sm text-foreground/90 text-left leading-relaxed">
                     <strong>Built for creators and neurodivergent users.</strong> Our early community includes people managing complex, non-linear workflows. If you&apos;ve ever felt overwhelmed by productivity tools, this is for you.
                   </p>
                 </div>
@@ -409,19 +410,19 @@ export default function Home() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="w-full py-20 bg-gray-50">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+      <section id="security" className="w-full py-24 md:py-32 section-divider">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
               Security & Control
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               You&apos;re always in the driver&apos;s seat. Here&apos;s how we keep it that way.
             </p>
           </motion.div>
@@ -458,13 +459,13 @@ export default function Home() {
               >
                 <Card>
                   <CardHeader>
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-green-600">
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded border border-border/40 text-foreground">
                       {item.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{item.title}</CardTitle>
+                    <CardTitle className="text-xl md:text-2xl text-foreground">{item.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{item.description}</p>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{item.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -476,11 +477,11 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <Card className="mx-auto max-w-3xl border-amber-200 bg-amber-50">
-              <CardContent className="pt-6">
-                <p className="text-xl md:text-2xl text-gray-700">
+            <Card className="mx-auto max-w-3xl border-border/30 bg-card/50">
+              <CardContent className="pt-6 pb-6">
+                <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
                   <strong>Transparency first.</strong> Siimba is an AI assistant. Always review before sending or scheduling. We reduce friction, not replace your judgment.
                 </p>
               </CardContent>
@@ -490,16 +491,16 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="w-full py-20 bg-white">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2000px] mx-auto">
+      <section id="faq" className="w-full py-24 md:py-32 section-divider">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
               Frequently Asked Questions
             </h2>
           </motion.div>
@@ -512,11 +513,11 @@ export default function Home() {
           >
             <Accordion type="single">
               {faqs.map((faq, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
-                  <AccordionTrigger className="text-xl md:text-2xl" onClick={() => trackEvents.faqOpened(faq.question)}>
+                <AccordionItem key={idx} value={`item-${idx}`} className="border-border/20">
+                  <AccordionTrigger className="text-base md:text-lg text-foreground hover:text-foreground/80" onClick={() => trackEvents.faqOpened(faq.question)}>
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-lg md:text-xl">{faq.answer}</AccordionContent>
+                  <AccordionContent className="text-sm md:text-base text-muted-foreground leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -532,36 +533,6 @@ export default function Home() {
   )
 }
 
-function FloatingBlobs() {
-  return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
-      <motion.div
-        className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-blue-200/30 blur-3xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute -right-32 top-64 h-96 w-96 rounded-full bg-purple-200/20 blur-3xl"
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    </div>
-  )
-}
 
 const faqs = [
   {
