@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 140 50% 92%;
-    --foreground: 140 30% 20%;
-    --card: 140 45% 96%;
-    --card-foreground: 140 30% 20%;
-    --popover: 140 45% 96%;
-    --popover-foreground: 140 30% 20%;
-    --primary: 140 45% 45%;
+    --background: 128 13% 92%;
+    --foreground: 128 15% 25%;
+    --card: 128 12% 95%;
+    --card-foreground: 128 15% 25%;
+    --popover: 128 12% 95%;
+    --popover-foreground: 128 15% 25%;
+    --primary: 128 13% 47%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 140 35% 85%;
-    --secondary-foreground: 140 30% 25%;
-    --muted: 140 30% 82%;
-    --muted-foreground: 140 15% 45%;
-    --accent: 140 40% 82%;
-    --accent-foreground: 140 30% 25%;
+    --secondary: 128 10% 84%;
+    --secondary-foreground: 128 15% 30%;
+    --muted: 128 8% 80%;
+    --muted-foreground: 128 8% 42%;
+    --accent: 128 12% 82%;
+    --accent-foreground: 128 15% 30%;
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 140 30% 75%;
-    --input: 140 30% 75%;
-    --ring: 140 45% 50%;
+    --border: 128 10% 74%;
+    --input: 128 10% 74%;
+    --ring: 128 13% 47%;
     --radius: 0.25rem;
   }
 }
@@ -103,10 +103,10 @@ body::before {
 /* Subtle glow pulse animation */
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(74, 222, 128, 0.3), 0 0 40px rgba(74, 222, 128, 0.15);
+    box-shadow: 0 0 20px rgba(104, 135, 108, 0.3), 0 0 40px rgba(104, 135, 108, 0.15);
   }
   50% {
-    box-shadow: 0 0 30px rgba(74, 222, 128, 0.4), 0 0 60px rgba(74, 222, 128, 0.2);
+    box-shadow: 0 0 30px rgba(104, 135, 108, 0.4), 0 0 60px rgba(104, 135, 108, 0.2);
   }
 }
 

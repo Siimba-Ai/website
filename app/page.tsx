@@ -104,8 +104,8 @@ export default function Home() {
       <section className="relative w-full pt-32 sm:pt-36 md:pt-44 lg:pt-52 pb-20 sm:pb-24 md:pb-32 lg:pb-40">
         {/* Subtle minimal graphic background */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4ade8018_1px,transparent_1px),linear-gradient(to_bottom,#4ade8018_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-          <div className="absolute left-1/4 top-1/4 w-96 h-96 bg-green-200/20 rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#68876c15_1px,transparent_1px),linear-gradient(to_bottom,#68876c15_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+          <div className="absolute left-1/4 top-1/4 w-96 h-96 bg-[#68876c]/10 rounded-full blur-3xl" />
         </div>
         
         <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">

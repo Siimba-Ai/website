@@ -48,7 +48,7 @@ export function Navigation() {
           </a>
 
           {/* CTA Button */}
-          <Button onClick={handleCTAClick} size="lg" className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 shadow-[0_0_20px_rgba(74,222,128,0.3),0_0_40px_rgba(74,222,128,0.15)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4),0_0_60px_rgba(74,222,128,0.2)] border-2">
+          <Button onClick={handleCTAClick} size="lg" className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 shadow-[0_0_20px_rgba(104,135,108,0.3),0_0_40px_rgba(104,135,108,0.15)] hover:shadow-[0_0_30px_rgba(104,135,108,0.4),0_0_60px_rgba(104,135,108,0.2)] border-2">
             Get early access
           </Button>
         </div>
