@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Check, Loader2 } from "lucide-react"
 import { trackEvents } from "@/lib/analytics"
+import { LiquidGlass } from "@/components/ui/liquid-glass"
 
 interface WaitlistFormData {
   email: string
@@ -80,7 +81,7 @@ export function WaitlistForm() {
       // Also store in localStorage as backup
       const existingData = localStorage.getItem("siimba-waitlist") || "[]"
       const waitlist = JSON.parse(existingData)
-      
+
       // Check if email already exists
       const emailExists = waitlist.some(
         (entry: WaitlistFormData) => entry.email === email
@@ -106,7 +107,7 @@ export function WaitlistForm() {
 
   if (isSuccess) {
     return (
-      <div className="rounded-[24px] glass-card-green p-10 text-center border border-sage/30">
+      <LiquidGlass variant="green" intensity="md" className="p-10 text-center border border-sage/30">
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sage/30 backdrop-blur-md">
           <Check className="h-8 w-8 text-sage" />
         </div>
@@ -124,7 +125,7 @@ export function WaitlistForm() {
         >
           Add another email
         </Button>
-      </div>
+      </LiquidGlass>
     )
   }
 

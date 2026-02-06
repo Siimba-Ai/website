@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { trackEvents } from "@/lib/analytics"
-import { LiquidGlassCard } from "@/components/ui/liquid-glass"
+import { LiquidGlass } from "@/components/ui/liquid-glass"
 
 export interface DecisionCard {
   id: string
@@ -69,27 +69,23 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
     setShowConfetti(false)
   }
 
-  const getTypeColor = (type: DecisionCard["type"]) => {
+  const getVariant = (type: DecisionCard["type"]) => {
     switch (type) {
-      case "calendar":
-        return "bg-sage/30 text-charcoal border border-sage/40"
       case "email":
-        return "bg-pink/30 text-charcoal border border-pink/40"
-      case "errand":
-        return "bg-sage/40 text-charcoal border border-sage/50"
       case "social":
-        return "bg-pink/40 text-charcoal border border-pink/50"
-      case "task":
-        return "bg-beige/60 text-charcoal border border-beige"
+        return "pink"
+      case "calendar":
+      case "errand":
+        return "green"
       default:
-        return "bg-white/40 text-charcoal border border-white/50"
+        return "default"
     }
   }
 
   if (isComplete) {
     return (
       <div className={cn("relative w-full", className)}>
-        <Card className="relative overflow-hidden glass-card-green p-10 md:p-12 text-center border-2 border-sage/40 shadow-2xl">
+        <LiquidGlass variant="green" intensity="lg" className="p-10 md:p-12 text-center border-2 border-sage/40 shadow-2xl">
           {showConfetti && <Confetti />}
 
           {/* Decorative gradient blob */}
@@ -110,93 +106,91 @@ export function DecisionStack({ cards, onComplete, className }: DecisionStackPro
               Reset demo
             </Button>
           </div>
-        </Card>
+        </LiquidGlass>
       </div>
     )
   }
 
   return (
     <div className={cn("relative w-full", className)}>
-      <LiquidGlassCard glowIntensity="xl" shadowIntensity="2xl" blurIntensity="xl" >
+      <LiquidGlass variant="elevated" intensity="lg" className="bg-white/10" >
         <div className="p-10 md:p-12 relative">
-        <div className="relative h-[500px] md:h-[540px] lg:h-[580px]">
-        {/* Stack preview (cards behind) */}
-        {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
-          <div
-            key={card.id}
-            className="absolute inset-0"
-            style={{
-              transform: `translateY(${(idx + 1) * 10}px) scale(${1 - (idx + 1) * 0.04})`,
-              zIndex: cards.length - currentIndex - idx - 1,
-              opacity: 1 - (idx + 1) * 0.25,
-            }}
-          >
-            <LiquidGlassCard
-              glowIntensity="sm"
-              shadowIntensity="md"
-              blurIntensity="sm"
-              borderRadius="28px"
-              className="h-full"
-            />
+          <div className="relative h-[500px] md:h-[540px] lg:h-[580px]">
+            {/* Stack preview (cards behind) */}
+            {cards.slice(currentIndex + 1, currentIndex + 3).map((card, idx) => (
+              <div
+                key={card.id}
+                className="absolute inset-0"
+                style={{
+                  transform: `translateY(${(idx + 1) * 10}px) scale(${1 - (idx + 1) * 0.04})`,
+                  zIndex: cards.length - currentIndex - idx - 1,
+                  opacity: 1 - (idx + 1) * 0.25,
+                }}
+              >
+                <LiquidGlass
+                  variant="default"
+                  intensity="sm"
+                  className="h-full rounded-[28px]"
+                />
+              </div>
+            ))}
+
+            {/* Active card */}
+            {currentIndex < cards.length && (
+              <SwipeableCard
+                card={cards[currentIndex]}
+                onApprove={handleApprove}
+                onSnooze={handleSnooze}
+                getVariant={getVariant}
+              />
+            )}
           </div>
-        ))}
 
-        {/* Active card */}
-        {currentIndex < cards.length && (
-          <SwipeableCard
-            card={cards[currentIndex]}
-            onApprove={handleApprove}
-            onSnooze={handleSnooze}
-            getTypeColor={getTypeColor}
-          />
-        )}
-        </div>
+          {/* Action buttons */}
+          <div className="mt-8 flex items-center justify-center gap-4">
+            <Button
+              onClick={handleSnooze}
+              variant="outline"
+              size="lg"
+              className="gap-2 flex-1 sm:flex-none rounded-[20px] relative overflow-hidden group"
+              aria-label="Snooze this decision"
+            >
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <X className="h-5 w-5 relative z-10" />
+              <span className="relative z-10">{cards[currentIndex]?.snoozeLabel || "Snooze"}</span>
+            </Button>
+            <Button
+              onClick={handleApprove}
+              size="lg"
+              className="gap-2 flex-1 sm:flex-none rounded-[20px] relative overflow-hidden group shadow-lg shadow-sage/30"
+              aria-label="Approve this decision"
+            >
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Check className="h-5 w-5 relative z-10" />
+              <span className="relative z-10">{cards[currentIndex]?.approveLabel || "Approve"}</span>
+            </Button>
+          </div>
 
-        {/* Action buttons */}
-      <div className="mt-8 flex items-center justify-center gap-4">
-        <Button
-          onClick={handleSnooze}
-          variant="outline"
-          size="lg"
-          className="gap-2 flex-1 sm:flex-none rounded-[20px] relative overflow-hidden group"
-          aria-label="Snooze this decision"
-        >
-          {/* Subtle hover glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <X className="h-5 w-5 relative z-10" />
-          <span className="relative z-10">{cards[currentIndex]?.snoozeLabel || "Snooze"}</span>
-        </Button>
-        <Button
-          onClick={handleApprove}
-          size="lg"
-          className="gap-2 flex-1 sm:flex-none rounded-[20px] relative overflow-hidden group shadow-lg shadow-sage/30"
-          aria-label="Approve this decision"
-        >
-          {/* Subtle hover glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <Check className="h-5 w-5 relative z-10" />
-          <span className="relative z-10">{cards[currentIndex]?.approveLabel || "Approve"}</span>
-        </Button>
-      </div>
-
-        {/* Progress indicator */}
-        <div className="mt-6 flex justify-center gap-3">
-          {cards.map((_, idx) => (
-            <div
-              key={idx}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300 spring-transition",
-                idx < currentIndex
-                  ? "w-2 bg-sage shadow-lg shadow-sage/40"
-                  : idx === currentIndex
-                  ? "w-8 glass-card-green border border-sage/40"
-                  : "w-2 glass-card border border-white/40"
-              )}
-            />
-          ))}
+          {/* Progress indicator */}
+          <div className="mt-6 flex justify-center gap-3">
+            {cards.map((_, idx) => (
+              <div
+                key={idx}
+                className={cn(
+                  "h-2 rounded-full transition-all duration-300 spring-transition",
+                  idx < currentIndex
+                    ? "w-2 bg-sage shadow-lg shadow-sage/40"
+                    : idx === currentIndex
+                      ? "w-8 glass-card-green border border-sage/40"
+                      : "w-2 glass-card border border-white/40"
+                )}
+              />
+            ))}
+          </div>
         </div>
-        </div>
-      </LiquidGlassCard>
+      </LiquidGlass>
     </div>
   )
 }
@@ -205,14 +199,14 @@ interface SwipeableCardProps {
   card: DecisionCard
   onApprove: () => void
   onSnooze: () => void
-  getTypeColor: (type: DecisionCard["type"]) => string
+  getVariant: (type: DecisionCard["type"]) => any
 }
 
 function SwipeableCard({
   card,
   onApprove,
   onSnooze,
-  getTypeColor,
+  getVariant,
 }: SwipeableCardProps) {
   const x = useMotionValue(0)
   const rotate = useTransform(x, [-200, 200], [-25, 25])
@@ -225,6 +219,11 @@ function SwipeableCard({
     }
   }
 
+  const variant = getVariant(card.type)
+  const badgeColor = variant === "pink" ? "bg-pink/40 text-charcoal border border-pink/50" :
+    variant === "green" ? "bg-sage/40 text-charcoal border border-sage/50" :
+      "bg-white/40 text-charcoal border border-white/50"
+
   return (
     <motion.div
       className="absolute inset-0 cursor-grab active:cursor-grabbing"
@@ -236,16 +235,14 @@ function SwipeableCard({
       whileTap={{ cursor: "grabbing" }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <LiquidGlassCard
-        glowIntensity="lg"
-        shadowIntensity="lg"
-        blurIntensity="md"
-        borderRadius="28px"
-        className="h-full p-8 md:p-9"
+      <LiquidGlass
+        variant={variant}
+        intensity="md"
+        className="h-full p-8 md:p-9 rounded-[28px]"
       >
         <div className="flex h-full flex-col">
           <div className="flex items-start justify-between mb-5">
-            <Badge className={cn(getTypeColor(card.type), "text-xs font-medium backdrop-blur-xl shadow-lg")}>{card.type}</Badge>
+            <Badge className={cn(badgeColor, "text-xs font-medium backdrop-blur-xl shadow-lg")}>{card.type}</Badge>
             <div className="p-2 rounded-full bg-white/20 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-sage/60 flex-shrink-0" />
             </div>
@@ -259,15 +256,13 @@ function SwipeableCard({
               <span className="w-4 h-0.5 bg-sage/30 rounded-full" />
               Prepared
             </p>
-            <LiquidGlassCard
-              glowIntensity="sm"
-              shadowIntensity="sm"
-              blurIntensity="sm"
-              borderRadius="20px"
-              className="p-5 md:p-6 bg-gradient-to-br from-sage/20 to-sage/5 border-sage/30"
+            <LiquidGlass
+              variant="default"
+              intensity="sm"
+              className="p-5 md:p-6 bg-gradient-to-br from-sage/20 to-sage/5 border-sage/30 rounded-[20px]"
             >
               <p className="text-sm md:text-base text-charcoal/80 leading-relaxed">{card.detail}</p>
-            </LiquidGlassCard>
+            </LiquidGlass>
           </div>
         </div>
 
@@ -298,7 +293,7 @@ function SwipeableCard({
         >
           <Check className="h-6 w-6 sm:h-8 sm:w-8 text-white drop-shadow-lg" />
         </motion.div>
-      </LiquidGlassCard>
+      </LiquidGlass>
     </motion.div>
   )
 }

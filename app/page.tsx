@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { trackEvents } from "@/lib/analytics"
+import { LiquidGlass } from "@/components/ui/liquid-glass"
 import { cn } from "@/lib/utils"
 
 const heroCards: DecisionCard[] = [
@@ -102,61 +103,68 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative w-full pt-24 md:pt-32 lg:pt-36 pb-12 md:pb-16 lg:pb-20">
-        <FloatingBlobs />
+      <section className="relative w-full pt-20 pb-20 md:pt-32 md:pb-32 min-h-[90vh] flex items-center justify-center overflow-hidden">
 
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-            {/* Left: Copy */}
+        {/* Abstract Background Elements - Subtle & Glassy */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-pink/20 rounded-full blur-[120px] opacity-40 animate-pulse" style={{ animationDuration: '8s' }} />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-sage/20 rounded-full blur-[120px] opacity-40 animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
+        </div>
+
+        <div className="w-full px-6 md:px-12 lg:px-16 xl:px-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left: Glass Slab with Copy */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="space-y-8"
+              className="lg:col-span-12 xl:col-span-12 text-center"
             >
+              <LiquidGlass variant="ultra" intensity="lg" className="inline-block p-8 md:p-16 backdrop-blur-[60px] border-white/30 shadow-[0_20px_80px_rgba(0,0,0,0.05)]">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-charcoal leading-[1.1] tracking-tight mb-8">
+                  You wake up.<br />
+                  You swipe yes.<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-sage to-pink">
+                    Your day is handled.
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl text-charcoal/70 leading-relaxed max-w-3xl mx-auto font-medium mb-10">
+                  Siimba prepares a small stack of decisions every morning. Approve, don't juggle.
+                </p>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-charcoal leading-[1.1] tracking-tight">
-                You wake up.<br />
-                You swipe yes 4 times.<br />
-                <span className="bg-gradient-to-r from-sage to-pink bg-clip-text text-transparent">
-                  Your day is handled.
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/60 leading-relaxed max-w-3xl font-medium">
-                Siimba prepares a small stack of decisions every morning. You approve, not juggle. Reduce decision fatigue and start your day staged.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <Button
-                  size="lg"
-                  className="text-xl md:text-2xl"
-                  onClick={() => {
-                    trackEvents.ctaClick("hero-primary")
-                    document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" })
-                  }}
-                >
-                  Get early access
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-xl md:text-2xl"
-                  onClick={() => {
-                    trackEvents.ctaClick("hero-secondary")
-                    document.querySelector("#demo")?.scrollIntoView({ behavior: "smooth" })
-                  }}
-                >
-                  Watch the demo
-                </Button>
-              </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    size="lg"
+                    className="text-xl px-10 py-8 rounded-full bg-charcoal text-white hover:bg-charcoal/90 shadow-xl hover:scale-105 transition-all duration-300"
+                    onClick={() => {
+                      trackEvents.ctaClick("hero-primary")
+                      document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" })
+                    }}
+                  >
+                    Get early access
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-xl px-10 py-8 rounded-full border-2 border-charcoal/10 bg-white/50 backdrop-blur-md hover:bg-white/80 transition-all duration-300"
+                    onClick={() => {
+                      trackEvents.ctaClick("hero-secondary")
+                      document.querySelector("#demo")?.scrollIntoView({ behavior: "smooth" })
+                    }}
+                  >
+                    How it works
+                  </Button>
+                </div>
+              </LiquidGlass>
             </motion.div>
 
-            {/* Right: Demo */}
+            {/* Centered below or floating: Demo Stack */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.2 }}
-              className="w-full"
+              className="lg:col-span-8 lg:col-start-3 xl:col-span-6 xl:col-start-4 mt-8"
             >
               <DecisionStack
                 cards={heroCards}
@@ -196,11 +204,11 @@ export default function Home() {
 
               {/* Right side: Form */}
               <div>
-                <Card className="glass-card">
-                  <CardContent className="pt-8 pb-8">
+                <LiquidGlass variant="default" intensity="md" className="backdrop-blur-xl">
+                  <div className="pt-8 pb-8 px-6">
                     <WaitlistForm />
-                  </CardContent>
-                </Card>
+                  </div>
+                </LiquidGlass>
               </div>
             </div>
           </motion.div>
@@ -255,43 +263,43 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 300, damping: 30, delay: idx * 0.1 }}
-                className="group"
+                className="group h-full"
               >
-                <Card className={cn(
-                  "glass-card relative overflow-hidden hover:glass-elevated spring-transition h-full",
-                  "border-2 border-white/40"
-                )}>
+                <LiquidGlass
+                  variant={step.accent as any}
+                  intensity="md"
+                  className="relative overflow-hidden h-full spring-transition hover:scale-[1.02]"
+                >
                   {/* Accent gradient overlay */}
                   <div className={cn(
                     "absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20 group-hover:opacity-30 spring-transition",
                     step.accent === "pink" ? "bg-pink" : "bg-sage"
                   )} />
 
-                  <CardHeader className="relative pb-4">
+                  <div className="relative p-6 pt-8 pb-8">
                     {/* Number indicator */}
-                    <div className="absolute -top-2 -right-2 text-7xl md:text-8xl font-bold text-charcoal/5 select-none">
+                    <div className="absolute top-2 right-4 text-6xl md:text-7xl font-bold text-charcoal/5 select-none font-sans">
                       {step.number}
                     </div>
 
                     {/* Icon with glass background */}
                     <div className={cn(
-                      "mb-6 flex h-20 w-20 items-center justify-center rounded-[20px] spring-transition group-hover:scale-110",
+                      "mb-6 flex h-20 w-20 items-center justify-center rounded-[20px] spring-transition group-hover:scale-110 border border-white/20",
                       step.accent === "pink" ? "glass-card-pink" : "glass-card-green",
                       step.accent === "pink" ? "text-pink" : "text-sage"
                     )}>
                       {step.icon}
                     </div>
 
-                    <CardTitle className="text-2xl md:text-3xl font-bold mb-3 relative z-10">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-3 relative z-10 text-charcoal">
                       {step.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="relative">
-                    <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed">
+                    </h3>
+
+                    <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed relative z-10">
                       {step.description}
                     </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                </LiquidGlass>
               </motion.div>
             ))}
           </div>
@@ -303,308 +311,270 @@ export default function Home() {
             transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.4 }}
             className="mt-16 text-center"
           >
-            <Card className="mx-auto max-w-3xl glass-card-green border-2 border-sage/30 shadow-xl relative overflow-hidden">
+            <LiquidGlass variant="green" intensity="md" className="mx-auto max-w-3xl border-2 border-sage/30 relative overflow-hidden">
               {/* Decorative blob */}
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-sage/20 rounded-full blur-3xl" />
 
-              <CardContent className="pt-8 pb-8 relative">
+              <div className="pt-8 pb-8 px-8 relative">
                 <p className="text-xl md:text-2xl text-charcoal leading-relaxed">
                   <strong className="font-bold text-charcoal">Proactive but bounded.</strong> Siimba suggests and drafts, but never acts without your approval. It reduces decision fatigue, not critical thinking.
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </LiquidGlass>
           </motion.div>
         </div></div>
       </section>
 
-      {false && (
-        <>
-      {/* ====== ARCHIVED SECTIONS (hidden for this version) ====== */}
-      {/* Demo Section */}
-      <section id="demo" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
-              Your day in 30 seconds
-            </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
-              Experience a typical morning with Siimba. Swipe through decisions and watch your day get staged.
-            </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-xl mx-auto"
-          >
-            <DecisionStack
-              cards={demoCards}
-              onComplete={() => {
-                trackEvents.demoCompleted()
-              }}
-            />
-          </motion.div>
-        </div></div>
-      </section>
+      <>
+        {/* ====== ARCHIVED SECTIONS (hidden for this version) ====== */}
+        {/* Demo Section */}
+        <section id="demo" className="w-full py-20 bg-gradient-to-b from-gray-50 to-white">
+          <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+                Your day in 30 seconds
+              </h2>
+              <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+                Experience a typical morning with Siimba. Swipe through decisions and watch your day get staged.
+              </p>
+            </motion.div>
 
-      {/* Why Siimba Section */}
-      <section id="why-siimba" className="w-full py-20 bg-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
-              Why Siimba
-            </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
-              Built for people who think different. Designed for busy brains.
-            </p>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-xl mx-auto"
+            >
+              <DecisionStack
+                cards={demoCards}
+                onComplete={() => {
+                  trackEvents.demoCompleted()
+                }}
+              />
+            </motion.div>
+          </div></div>
+        </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: <Target className="h-6 w-6" />,
-                title: "Decision Cards, not dashboards",
-                description: "Swipe through focused decisions instead of context switching across endless tabs and tools.",
-              },
-              {
-                icon: <Zap className="h-6 w-6" />,
-                title: "Proactive, not naggy",
-                description: "Siimba prepares what you need when you need it. No constant notifications. No pestering.",
-              },
-              {
-                icon: <Brain className="h-6 w-6" />,
-                title: "Memory that gets better",
-                description: "Learns your preferences, patterns, and priorities. The more you use it, the smarter it gets.",
-              },
-              {
-                icon: <Layers className="h-6 w-6" />,
-                title: "Works across your tools",
-                description: "Connects to your calendar, email, tasks, and notes. One interface for everything.",
-              },
-              {
-                icon: <Shield className="h-6 w-6" />,
-                title: "Bounded autonomy",
-                description: "Never acts without approval. You're always in control. It suggests, you decide.",
-              },
-              {
-                icon: <Sparkles className="h-6 w-6" />,
-                title: "Designed for busy brains",
-                description: "Built with ADHD and neurodivergent users in mind. Reduce overwhelm and decision paralysis.",
-              },
-            ].map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.05 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        {/* Why Siimba Section */}
+        <section id="why-siimba" className="w-full py-20 bg-white">
+          <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+                Why Siimba
+              </h2>
+              <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+                Built for people who think different. Designed for busy brains.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: <Target className="h-6 w-6" />,
+                  title: "Decision Cards, not dashboards",
+                  description: "Swipe through focused decisions instead of context switching across endless tabs and tools.",
+                },
+                {
+                  icon: <Zap className="h-6 w-6" />,
+                  title: "Proactive, not naggy",
+                  description: "Siimba prepares what you need when you need it. No constant notifications. No pestering.",
+                },
+                {
+                  icon: <Brain className="h-6 w-6" />,
+                  title: "Memory that gets better",
+                  description: "Learns your preferences, patterns, and priorities. The more you use it, the smarter it gets.",
+                },
+                {
+                  icon: <Layers className="h-6 w-6" />,
+                  title: "Works across your tools",
+                  description: "Connects to your calendar, email, tasks, and notes. One interface for everything.",
+                },
+                {
+                  icon: <Shield className="h-6 w-6" />,
+                  title: "Bounded autonomy",
+                  description: "Never acts without approval. You're always in control. It suggests, you decide.",
+                },
+                {
+                  icon: <Sparkles className="h-6 w-6" />,
+                  title: "Designed for busy brains",
+                  description: "Built with ADHD and neurodivergent users in mind. Reduce overwhelm and decision paralysis.",
+                },
+              ].map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.05 }}
+                  className="h-full"
+                >
+                  <LiquidGlass variant="default" intensity="sm" className="h-full hover:scale-[1.02] spring-transition p-8">
+                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-sage/20 text-charcoal">
                       {feature.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-3 text-charcoal">{feature.title}</h3>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
-          >
-            <Card className="mx-auto max-w-3xl border-purple-200 bg-purple-50">
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-3">
-                  <Users className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-gray-700 text-left">
+                    <p className="text-xl md:text-2xl text-charcoal/70 leading-relaxed">{feature.description}</p>
+                  </LiquidGlass>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-12 text-center"
+            >
+              <LiquidGlass variant="pink" intensity="sm" className="mx-auto max-w-3xl border-pink/30">
+                <div className="p-8 flex items-start gap-4">
+                  <Users className="h-6 w-6 text-pink mt-1 flex-shrink-0" />
+                  <p className="text-lg md:text-xl text-charcoal text-left leading-relaxed">
                     <strong>Built for creators and neurodivergent users.</strong> Our early community includes people managing complex, non-linear workflows. If you've ever felt overwhelmed by productivity tools, this is for you.
                   </p>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div></div>
-      </section>
+              </LiquidGlass>
+            </motion.div>
+          </div></div>
+        </section>
 
-      {/* Security Section */}
-      <section id="security" className="w-full py-20 bg-gray-50">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
-              Security & Control
-            </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
-              You&apos;re always in the driver&apos;s seat. Here&apos;s how we keep it that way.
-            </p>
-          </motion.div>
+        {/* Security Section */}
+        <section id="security" className="w-full py-20 bg-gray-50">
+          <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2800px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 mb-4">
+                Security & Control
+              </h2>
+              <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+                You&apos;re always in the driver&apos;s seat. Here&apos;s how we keep it that way.
+              </p>
+            </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                icon: <CheckCircle2 className="h-6 w-6" />,
-                title: "Human in the loop approvals",
-                description: "Every action requires your explicit approval. Siimba drafts and suggests; you decide and execute.",
-              },
-              {
-                icon: <Eye className="h-6 w-6" />,
-                title: "Just in time permissions",
-                description: "Siimba only asks for access when needed. You grant permissions per action, not upfront.",
-              },
-              {
-                icon: <Power className="h-6 w-6" />,
-                title: "Kill switch",
-                description: "One button to pause all activity. Disconnect any tool instantly. Full control, always.",
-              },
-              {
-                icon: <Lock className="h-6 w-6" />,
-                title: "You control connected accounts",
-                description: "Manage what Siimba can see and do. Revoke access anytime from your dashboard.",
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <Card>
-                  <CardHeader>
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-green-600">
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {[
+                {
+                  icon: <CheckCircle2 className="h-6 w-6" />,
+                  title: "Human in the loop approvals",
+                  description: "Every action requires your explicit approval. Siimba drafts and suggests; you decide and execute.",
+                },
+                {
+                  icon: <Eye className="h-6 w-6" />,
+                  title: "Just in time permissions",
+                  description: "Siimba only asks for access when needed. You grant permissions per action, not upfront.",
+                },
+                {
+                  icon: <Power className="h-6 w-6" />,
+                  title: "Kill switch",
+                  description: "One button to pause all activity. Disconnect any tool instantly. Full control, always.",
+                },
+                {
+                  icon: <Lock className="h-6 w-6" />,
+                  title: "You control connected accounts",
+                  description: "Manage what Siimba can see and do. Revoke access anytime from your dashboard.",
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                >
+                  <LiquidGlass variant="default" intensity="sm" className="h-full p-8">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-100/50 text-green-700">
                       {item.icon}
                     </div>
-                    <CardTitle className="text-2xl md:text-3xl">{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-xl md:text-2xl text-gray-600">{item.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-3 text-charcoal">{item.title}</h3>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-12 text-center"
-          >
-            <Card className="mx-auto max-w-3xl border-amber-200 bg-amber-50">
-              <CardContent className="pt-6">
-                <p className="text-xl md:text-2xl text-gray-700">
-                  <strong>Transparency first.</strong> Siimba is an AI assistant. Always review before sending or scheduling. We reduce friction, not replace your judgment.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div></div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="faq" className="w-full py-20 bg-white">
-        <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2000px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900">
-              Frequently Asked Questions
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Accordion type="single">
-              {faqs.map((faq, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
-                  <AccordionTrigger className="text-xl md:text-2xl" onClick={() => trackEvents.faqOpened(faq.question)}>
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-lg md:text-xl">{faq.answer}</AccordionContent>
-                </AccordionItem>
+                    <p className="text-xl md:text-2xl text-charcoal/70 leading-relaxed">{item.description}</p>
+                  </LiquidGlass>
+                </motion.div>
               ))}
-            </Accordion>
-          </motion.div>
-        </div></div>
-      </section>
-      {/* ====== END ARCHIVED SECTIONS ====== */}
-        </>
-      )}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-12 text-center"
+            >
+              <LiquidGlass variant="default" intensity="sm" className="mx-auto max-w-3xl border-amber-200/50 bg-amber-50/30">
+                <div className="p-8">
+                  <p className="text-xl md:text-2xl text-charcoal">
+                    <strong>Transparency first.</strong> Siimba is an AI assistant. Always review before sending or scheduling. We reduce friction, not replace your judgment.
+                  </p>
+                </div>
+              </LiquidGlass>
+            </motion.div>
+          </div></div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="w-full py-20 bg-white">
+          <div className="w-full px-8 md:px-12 lg:px-16 xl:px-20"><div className="max-w-[2000px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900">
+                Frequently Asked Questions
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Accordion type="single">
+                {faqs.map((faq, idx) => (
+                  <AccordionItem key={idx} value={`item-${idx}`}>
+                    <AccordionTrigger className="text-xl md:text-2xl" onClick={() => trackEvents.faqOpened(faq.question)}>
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-lg md:text-xl">{faq.answer}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+          </div></div>
+        </section>
+        {/* ====== END ARCHIVED SECTIONS ====== */}
+      </>
+
 
       <Footer />
     </main>
   )
 }
 
-function FloatingBlobs() {
-  return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
-      <motion.div
-        className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink/10 blur-3xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute right-0 top-32 h-[600px] w-[600px] rounded-full bg-sage/8 blur-3xl"
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 60, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    </div>
-  )
-}
+
 
 const faqs = [
   {

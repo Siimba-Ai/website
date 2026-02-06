@@ -58,11 +58,12 @@ const AccordionItem = React.forwardRef<HTMLDivElement, { value: string; children
 )
 AccordionItem.displayName = "AccordionItem"
 
-const AccordionTrigger = React.forwardRef<HTMLButtonElement, { children: React.ReactNode; className?: string }>(
-  ({ children, className }, ref) => {
+const AccordionTrigger = React.forwardRef<HTMLButtonElement, { children: React.ReactNode; className?: string; onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void }>(
+  ({ children, className, onClick }, ref) => {
     const { openItems, toggleItem } = useAccordion()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      onClick?.(e)
       const itemValue = e.currentTarget.closest("[data-value]")?.getAttribute("data-value")
       if (itemValue) toggleItem(itemValue)
     }

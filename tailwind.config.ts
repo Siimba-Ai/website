@@ -89,10 +89,34 @@ const config: Config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'aurora': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'blob': {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'drift': {
+          '0%': { transform: 'translateX(-5%)' },
+          '100%': { transform: 'translateX(5%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'aurora': 'aurora 60s linear infinite',
+        'blob-1': 'blob 7s infinite',
+        'blob-2': 'blob 12s infinite',
+        'blob-3': 'blob 10s infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'drift': 'drift 20s linear infinite alternate',
       },
       boxShadow: {
         glass: '0 8px 32px rgba(0, 0, 0, 0.08)',
