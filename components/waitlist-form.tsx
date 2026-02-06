@@ -1,31 +1,20 @@
 "use client"
 
 import * as React from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Check, Loader2 } from "lucide-react"
+import { Mail, ArrowRight, Calendar, Sparkles } from "lucide-react"
 import { trackEvents } from "@/lib/analytics"
-import { LiquidGlass } from "@/components/ui/liquid-glass"
 
 interface WaitlistFormData {
   email: string
-  category: string
+  useCase: string
   interview: boolean
   timestamp: string
 }
 
-const categories = [
-  { value: "personal", label: "Personal" },
-  { value: "work", label: "Work" },
-  { value: "creator", label: "Creator" },
-  { value: "student", label: "Student" },
-  { value: "other", label: "Other" },
-]
-
 export function WaitlistForm() {
   const [email, setEmail] = React.useState("")
-  const [category, setCategory] = React.useState("personal")
-  const [interview, setInterview] = React.useState(false)
+  const [useCase, setUseCase] = React.useState("personal")
+  const [openToInterview, setOpenToInterview] = React.useState(false)
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [isSuccess, setIsSuccess] = React.useState(false)
   const [error, setError] = React.useState("")
@@ -55,8 +44,8 @@ export function WaitlistForm() {
     try {
       const formData: WaitlistFormData = {
         email,
-        category,
-        interview,
+        useCase,
+        interview: openToInterview,
         timestamp: new Date().toISOString(),
       }
 
@@ -92,12 +81,12 @@ export function WaitlistForm() {
         localStorage.setItem("siimba-waitlist", JSON.stringify(waitlist))
       }
 
-      trackEvents.waitlistJoined(category)
+      trackEvents.waitlistJoined(useCase)
 
       setIsSuccess(true)
       setEmail("")
-      setCategory("personal")
-      setInterview(false)
+      setUseCase("personal")
+      setOpenToInterview(false)
     } catch (err) {
       setError("Something went wrong. Please try again.")
     } finally {
@@ -105,118 +94,161 @@ export function WaitlistForm() {
     }
   }
 
-  if (isSuccess) {
-    return (
-      <LiquidGlass variant="green" intensity="md" className="p-10 text-center border border-sage/30">
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sage/30 backdrop-blur-md">
-          <Check className="h-8 w-8 text-sage" />
-        </div>
-        <h3 className="mb-4 text-3xl md:text-4xl font-bold text-charcoal">
-          You&apos;re on the list!
-        </h3>
-        <p className="mb-6 text-xl md:text-2xl text-charcoal/70">
-          We&apos;ll email you when the demo is ready. No spam.
-        </p>
-        <Button
-          onClick={() => setIsSuccess(false)}
-          variant="outline"
-          size="lg"
-          className="text-lg"
-        >
-          Add another email
-        </Button>
-      </LiquidGlass>
-    )
-  }
-
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/siimba"
+  const calendlyUrl = "https://calendly.com/vrinda-siimba/30min"
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div>
-        <label htmlFor="email" className="mb-3 block text-xl md:text-2xl font-semibold text-charcoal">
-          Email address
-        </label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isSubmitting}
-          className="w-full text-lg md:text-xl"
-          aria-describedby={error ? "email-error" : undefined}
-        />
-        {error && (
-          <p id="email-error" className="mt-2 text-base md:text-lg text-pink font-medium">
-            {error}
+    <div className="max-w-md mx-auto">
+      <div className="glass-card-strong p-6 sm:p-8 hover:scale-[1.01] transition-transform duration-500">
+        {/* Shimmer effect */}
+        <div className="absolute inset-0 rounded-[var(--radius)] overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 animate-shimmer opacity-30" />
+        </div>
+
+        <div className="relative">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary animate-pulse-soft" />
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-foreground text-center">
+              Get early access
+            </h2>
+          </div>
+          <p className="text-foreground/70 text-center mb-6 sm:mb-8 text-sm sm:text-base">
+            Join the waitlist. We'll email you when the demo is ready.
           </p>
-        )}
+
+          {isSuccess ? (
+            <div className="text-center py-6 sm:py-8 animate-scale-in">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-4 animate-bounce-subtle">
+                <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-success" />
+              </div>
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2">
+                You&apos;re on the list!
+              </h3>
+              <p className="text-foreground/70 text-sm sm:text-base">
+                We&apos;ll reach out when Siimba is ready.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+              {/* Email Input */}
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+                <label className="block text-foreground/80 text-sm font-medium mb-2">
+                  Email address
+                </label>
+                <div className="relative group">
+                  <Mail className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="glass-input pl-10 sm:pl-12 text-sm sm:text-base"
+                    required
+                  />
+                </div>
+                {error && (
+                  <p className="mt-2 text-sm text-destructive">{error}</p>
+                )}
+              </div>
+
+              {/* Use Case Selection */}
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+                <label className="block text-foreground/80 text-sm font-medium mb-3">
+                  I&apos;m using Siimba for:
+                </label>
+                <div className="flex gap-2 sm:gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setUseCase("personal")}
+                    className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
+                      useCase === "personal"
+                        ? "glass-button-primary text-foreground scale-[1.02]"
+                        : "glass-button text-foreground/70 hover:scale-[1.02]"
+                    }`}
+                  >
+                    Personal
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUseCase("work")}
+                    className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
+                      useCase === "work"
+                        ? "glass-button-primary text-foreground scale-[1.02]"
+                        : "glass-button text-foreground/70 hover:scale-[1.02]"
+                    }`}
+                  >
+                    Work
+                  </button>
+                </div>
+              </div>
+
+              {/* Interview Checkbox */}
+              <label className="flex items-start gap-3 cursor-pointer group animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+                <div className="relative mt-0.5">
+                  <input
+                    type="checkbox"
+                    checked={openToInterview}
+                    onChange={(e) => setOpenToInterview(e.target.checked)}
+                    className="sr-only"
+                  />
+                  <div
+                    className={`w-5 h-5 rounded-md border-2 transition-all duration-300 ${
+                      openToInterview
+                        ? "bg-primary/30 border-primary scale-110"
+                        : "bg-foreground/5 border-foreground/30 group-hover:border-foreground/50 group-hover:scale-105"
+                    }`}
+                  >
+                    {openToInterview && (
+                      <svg
+                        className="w-5 h-5 text-primary animate-scale-in"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+                <span className="text-foreground/70 text-sm leading-snug group-hover:text-foreground/90 transition-colors duration-300">
+                  I&apos;m open to a 15-min user interview
+                </span>
+              </label>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full glass-button-primary text-foreground font-semibold py-3 sm:py-4 flex items-center justify-center gap-2 group animate-fade-in-up text-sm sm:text-base"
+                style={{ animationDelay: "0.4s" }}
+              >
+                {isSubmitting ? "Joining..." : "Join waitlist"}
+                {!isSubmitting && <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />}
+              </button>
+
+              <p className="text-foreground/50 text-xs text-center animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+                No spam. We email when the demo is ready.
+              </p>
+            </form>
+          )}
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="category" className="mb-3 block text-xl md:text-2xl font-semibold text-charcoal">
-          I&apos;m using Siimba for:
-        </label>
-        <select
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          disabled={isSubmitting}
-          className="flex h-14 w-full rounded-2xl border border-charcoal/20 glass-card px-4 py-3 text-lg md:text-xl text-charcoal spring-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {categories.map((cat) => (
-            <option key={cat.value} value={cat.value}>
-              {cat.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="flex items-start gap-3">
-        <input
-          type="checkbox"
-          id="interview"
-          checked={interview}
-          onChange={(e) => setInterview(e.target.checked)}
-          disabled={isSubmitting}
-          className="mt-1 h-5 w-5 rounded border-sage/30 text-sage focus:ring-2 focus:ring-sage spring-transition"
-        />
-        <label htmlFor="interview" className="text-lg md:text-xl text-charcoal/80">
-          I&apos;m open to a 15-min user interview
-        </label>
-      </div>
-
-      <Button
-        type="submit"
-        size="lg"
-        disabled={isSubmitting}
-        className="w-full h-14 text-xl md:text-2xl shadow-lg hover:shadow-xl"
+      {/* Book a call link */}
+      <a
+        href={calendlyUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-foreground/70 hover:text-foreground transition-all duration-300 group"
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Joining...
-          </>
-        ) : (
-          "Join waitlist"
-        )}
-      </Button>
-
-      <p className="text-center text-base md:text-lg text-charcoal/60">
-        No spam. We email when the demo is ready.
-      </p>
-
-      <div className="text-center">
-        <a
-          href={calendlyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-lg md:text-xl font-semibold text-sage hover:text-sage/80 spring-transition"
-        >
-          Or book a call to learn more →
-        </a>
-      </div>
-    </form>
+        <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+        <span className="text-xs sm:text-sm">Or book a call to learn more</span>
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+      </a>
+    </div>
   )
 }
