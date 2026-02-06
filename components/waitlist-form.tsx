@@ -112,7 +112,7 @@ export function WaitlistForm() {
             </h2>
           </div>
           <p className="text-foreground/70 text-center mb-6 sm:mb-8 text-sm sm:text-base">
-            Join the waitlist. We'll email you when the demo is ready.
+            Join the waitlist. We&apos;ll email you when the demo is ready.
           </p>
 
           {isSuccess ? (
