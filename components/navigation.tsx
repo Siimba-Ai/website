@@ -13,9 +13,13 @@ export function Navigation() {
         {/* Logo */}
         <a
           href="/"
-          className="font-display text-xl sm:text-2xl font-bold text-foreground hover:scale-105 transition-transform duration-300"
+          className="flex items-center hover:scale-105 transition-transform duration-300"
         >
-          Siimba
+          <img
+            src="/logo.svg"
+            alt="Siimba"
+            className="h-8 sm:h-10 w-auto"
+          />
         </a>
 
         {/* CTA */}
