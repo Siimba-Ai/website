@@ -16,7 +16,7 @@ export function Navigation() {
           className="flex items-center hover:scale-105 transition-transform duration-300"
         >
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="Siimba"
             className="h-8 sm:h-10 w-auto"
           />
