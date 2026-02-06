@@ -59,22 +59,19 @@ export function WaitlistForm() {
         timestamp: new Date().toISOString(),
       }
 
-      // Get Google Sheets Web App URL from environment variable
-      const sheetURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL
+      // Send to our API endpoint (which handles both email and Google Sheets)
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-      if (sheetURL) {
-        // Send to Google Sheets
-        const response = await fetch(sheetURL, {
-          method: "POST",
-          mode: "no-cors", // Required for Google Apps Script
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
+      const result = await response.json()
 
-        // Note: no-cors mode doesn't allow reading the response
-        // We assume success if no error is thrown
+      if (!response.ok) {
+        throw new Error(result.error || "Something went wrong")
       }
 
       // Also store in localStorage as backup
@@ -98,7 +95,7 @@ export function WaitlistForm() {
       setCategory("personal")
       setInterview(false)
     } catch (err) {
-      setError("Something went wrong. Please try again.")
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
