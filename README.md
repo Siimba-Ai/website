@@ -127,6 +127,11 @@ Create a `.env.local` file for optional configuration:
 
 ```env
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/siimba
+RESEND_API_KEY=your_resend_api_key
+# Use a verified sender in production:
+# RESEND_FROM_EMAIL=Siimba <hello@siimba.ai>
+# Optional if you want to use a Resend template for welcome emails:
+# RESEND_WELCOME_TEMPLATE_ID=your_template_id
 ```
 
 ## Analytics Integration

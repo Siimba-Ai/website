@@ -67,6 +67,32 @@ export function WaitlistForm() {
         // We assume success if no error is thrown
       }
 
+      // Send welcome email via Resend
+      try {
+        const emailResponse = await fetch("/api/send-welcome", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            useCase,
+            interview: openToInterview,
+          }),
+        })
+
+        if (!emailResponse.ok) {
+          const errorBody = await emailResponse.json().catch(() => null)
+          console.error(
+            "Failed to send welcome email:",
+            errorBody?.error || emailResponse.statusText
+          )
+        }
+      } catch (emailError) {
+        // Don't fail the entire form submission if email fails
+        console.error("Error sending welcome email:", emailError)
+      }
+
       // Also store in localStorage as backup
       const existingData = localStorage.getItem("siimba-waitlist") || "[]"
       const waitlist = JSON.parse(existingData)
@@ -158,22 +184,24 @@ export function WaitlistForm() {
                 <div className="flex gap-2 sm:gap-3">
                   <button
                     type="button"
+                    aria-pressed={useCase === "personal"}
                     onClick={() => setUseCase("personal")}
                     className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
                       useCase === "personal"
-                        ? "glass-button-primary text-foreground scale-[1.02]"
-                        : "glass-button text-foreground/70 hover:scale-[1.02]"
+                        ? "glass-button text-foreground font-semibold scale-[1.02] bg-primary/20 border-primary/70 ring-2 ring-primary/30 shadow-lg"
+                        : "glass-button text-foreground/70 hover:text-foreground hover:bg-white/60"
                     }`}
                   >
                     Personal
                   </button>
                   <button
                     type="button"
+                    aria-pressed={useCase === "work"}
                     onClick={() => setUseCase("work")}
                     className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
                       useCase === "work"
-                        ? "glass-button-primary text-foreground scale-[1.02]"
-                        : "glass-button text-foreground/70 hover:scale-[1.02]"
+                        ? "glass-button text-foreground font-semibold scale-[1.02] bg-primary/20 border-primary/70 ring-2 ring-primary/30 shadow-lg"
+                        : "glass-button text-foreground/70 hover:text-foreground hover:bg-white/60"
                     }`}
                   >
                     Work
