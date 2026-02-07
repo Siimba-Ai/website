@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   description: 'Siimba prepares a small stack of decisions every morning so you can approve, not juggle. Reduce decision fatigue and start your day staged.',
   keywords: ['AI assistant', 'productivity', 'decision management', 'ADHD', 'task management', 'daily planning'],
   authors: [{ name: 'Siimba' }],
+  icons: {
+    icon: '/static/siimba-icon.png',
+    shortcut: '/static/siimba-icon.png',
+    apple: '/static/siimba-icon.png',
+  },
   openGraph: {
     title: 'Siimba | You wake up. You swipe yes 4 times. Your day is handled.',
     description: 'Siimba prepares a small stack of decisions every morning so you can approve, not juggle.',
@@ -41,9 +46,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={spaceGrotesk.variable}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
       <body className="font-sans antialiased overflow-x-hidden w-full">
         {children}
       </body>
