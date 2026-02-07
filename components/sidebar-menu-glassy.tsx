@@ -1,4 +1,4 @@
-import { LiquidGlassCard } from '@/components/ui/liquid-glass';
+import { LiquidGlass as LiquidGlassCard } from '@/components/ui/liquid-glass';
 import { cn } from '@/lib/utils';
 
 import {
@@ -20,12 +20,8 @@ const SidebarMenuGlassy = ({className}:{className?:string}) => {
         }}
       >
         <LiquidGlassCard
-          glowIntensity="lg"
-          shadowIntensity="xl"
-          borderRadius="24px"
-          blurIntensity="xl"
           draggable
-          className="w-[280px]"
+          className="w-[280px] rounded-3xl"
         >
           <nav className="space-y-2 w-full relative z-30 p-4">
             <button

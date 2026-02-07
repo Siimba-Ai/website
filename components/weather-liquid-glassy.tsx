@@ -1,4 +1,4 @@
-import { LiquidGlassCard } from '@/components/ui/liquid-glass';
+import { LiquidGlass as LiquidGlassCard } from '@/components/ui/liquid-glass';
 import {
   Cloud,
   CloudSun,
@@ -21,8 +21,6 @@ const WeatherLiquidGlassy = () => {
         <div className="grid w-full max-w-xl grid-cols-2 gap-4 mx-auto">
           {/* Hourly Forecast Card */}
           <LiquidGlassCard
-            shadowIntensity="xl"
-            glowIntensity="lg"
             className="col-span-2 text-white"
           >
             <div className="flex justify-between relative z-30 text-sm font-medium p-6">
@@ -61,8 +59,6 @@ const WeatherLiquidGlassy = () => {
 
           {/* Current Weather Card */}
           <LiquidGlassCard
-            shadowIntensity="xl"
-            glowIntensity="lg"
             className="text-white"
           >
             <div className="relative z-30 flex flex-col items-start justify-center h-full w-full p-6">
@@ -73,8 +69,6 @@ const WeatherLiquidGlassy = () => {
 
           {/* Time and Location Card */}
           <LiquidGlassCard
-            shadowIntensity="xl"
-            glowIntensity="lg"
             className="text-white"
           >
             <div className="relative z-30 flex flex-col items-start justify-center h-full w-full p-6">
@@ -89,8 +83,6 @@ const WeatherLiquidGlassy = () => {
 
           {/* Daily Forecast Card */}
           <LiquidGlassCard
-            shadowIntensity="xl"
-            glowIntensity="lg"
             className="col-span-2 text-white"
           >
             <div className="relative z-30 flex flex-col gap-4 h-full w-full p-6">
