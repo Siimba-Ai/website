@@ -219,7 +219,7 @@ export function WaitlistForm() {
                     className="sr-only"
                   />
                   <div
-                    className={`w-5 h-5 rounded-md border-2 transition-all duration-300 ${
+                    className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-300 ${
                       openToInterview
                         ? "bg-primary/30 border-primary scale-110"
                         : "bg-foreground/5 border-foreground/30 group-hover:border-foreground/50 group-hover:scale-105"
@@ -227,7 +227,7 @@ export function WaitlistForm() {
                   >
                     {openToInterview && (
                       <svg
-                        className="w-5 h-5 text-primary animate-scale-in"
+                        className="w-3.5 h-3.5 text-primary animate-scale-in"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
