@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
+const isGithubPagesBuild = process.env.GITHUB_ACTIONS === 'true'
+
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  output: isGithubPagesBuild ? 'export' : undefined,
   images: {
-    unoptimized: true,
+    unoptimized: isGithubPagesBuild,
   },
 }
 
