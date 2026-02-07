@@ -112,7 +112,7 @@ export default function PageV2() {
                             <div>
                                 <h3 className="text-4xl font-bold text-white mb-6 drop-shadow-md">Metabolic Pace</h3>
                                 <p className="text-2xl text-white/80 leading-relaxed font-medium">
-                                    Siimba matches your energy. It learns when you're sharpest and stacks high-cognitive decisions then.
+                                    Siimba matches your energy. It learns when you&apos;re sharpest and stacks high-cognitive decisions then.
                                 </p>
                             </div>
                         </LiquidGlass>
@@ -132,7 +132,7 @@ export default function PageV2() {
                                 <Brain className="w-20 h-20 text-white mx-auto mb-10 relative z-10 drop-shadow-lg" />
                                 <h3 className="text-5xl md:text-6xl font-bold text-white mb-8 relative z-10 drop-shadow-md">Bounded Autonomy</h3>
                                 <p className="text-2xl text-white/80 leading-relaxed max-w-sm mx-auto relative z-10 font-medium">
-                                    AI that suggests, drafts, and preps—but never acts without your 'Yes'. You remain the pilot; Siimba is the engine.
+                                    AI that suggests, drafts, and preps—but never acts without your &apos;Yes&apos;. You remain the pilot; Siimba is the engine.
                                 </p>
                             </div>
                         </LiquidGlass>
