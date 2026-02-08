@@ -1,4 +1,5 @@
 import { Mail, FileText, Shield } from "lucide-react"
+import { trackEvents } from "@/lib/analytics"
 
 export function Footer() {
   return (
@@ -21,6 +22,7 @@ export function Footer() {
             <div className="space-y-3">
               <a
                 href="/privacy"
+                onClick={() => trackEvents.linkClick("footer", "privacy_policy")}
                 className="flex items-center gap-2 text-foreground/70 hover:text-foreground transition-all duration-300 text-xs sm:text-sm group"
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl glass-icon-button flex items-center justify-center">
@@ -30,6 +32,7 @@ export function Footer() {
               </a>
               <a
                 href="/terms"
+                onClick={() => trackEvents.linkClick("footer", "terms_of_service")}
                 className="flex items-center gap-2 text-foreground/70 hover:text-foreground transition-all duration-300 text-xs sm:text-sm group"
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl glass-icon-button flex items-center justify-center">
@@ -45,6 +48,7 @@ export function Footer() {
             <h4 className="font-semibold text-foreground/80 mb-3 sm:mb-4 text-sm sm:text-base">Connect</h4>
             <a
               href="mailto:vrinda@siimba.ai"
+              onClick={() => trackEvents.linkClick("footer", "contact_email")}
               className="flex w-9 h-9 sm:w-10 sm:h-10 rounded-xl glass-icon-button items-center justify-center"
               aria-label="Email vrinda@siimba.ai"
             >

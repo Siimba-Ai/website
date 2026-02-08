@@ -1,7 +1,8 @@
 "use client"
 
 import { Sparkles, X, Check } from "lucide-react"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { trackEvents } from "@/lib/analytics"
 
 const demoCards = [
   {
@@ -34,8 +35,24 @@ export function DemoCard() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [editedText, setEditedText] = useState("")
+  const hasTrackedDemoStart = useRef(false)
+  const hasTrackedEditForCard = useRef<Record<number, boolean>>({})
+
+  const trackDemoStartIfNeeded = () => {
+    if (!hasTrackedDemoStart.current) {
+      hasTrackedDemoStart.current = true
+      trackEvents.demoStarted()
+    }
+  }
 
   const handleAction = (action: "approve" | "edit") => {
+    trackDemoStartIfNeeded()
+    const card = demoCards[currentIndex]
+    trackEvents.demoCardAction(action === "edit" ? "reject" : action, card.category, currentIndex + 1)
+    if (currentIndex === demoCards.length - 1) {
+      trackEvents.demoCompleted()
+    }
+
     setIsAnimating(true)
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % demoCards.length)
@@ -76,7 +93,14 @@ export function DemoCard() {
           <div className="mt-2 p-3 sm:p-4 rounded-xl bg-foreground/5 border border-foreground/10">
             <textarea
               value={displayText}
-              onChange={(e) => setEditedText(e.target.value)}
+              onChange={(e) => {
+                trackDemoStartIfNeeded()
+                if (!hasTrackedEditForCard.current[currentIndex]) {
+                  hasTrackedEditForCard.current[currentIndex] = true
+                  trackEvents.demoEdited(card.category)
+                }
+                setEditedText(e.target.value)
+              }}
               className="w-full text-foreground/80 text-xs sm:text-sm leading-relaxed bg-transparent border-none outline-none resize-none"
               rows={3}
               placeholder={card.prepared}
@@ -108,7 +132,11 @@ export function DemoCard() {
         {demoCards.map((_, i) => (
           <button
             key={i}
-            onClick={() => setCurrentIndex(i)}
+            onClick={() => {
+              trackDemoStartIfNeeded()
+              trackEvents.demoCardJump(i + 1)
+              setCurrentIndex(i)
+            }}
             className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
               i === currentIndex
                 ? "bg-primary w-3 sm:w-4"

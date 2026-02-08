@@ -1,9 +1,11 @@
 "use client"
 
 import { ChevronRight } from "lucide-react"
+import { trackEvents } from "@/lib/analytics"
 
 export function Navigation() {
   const scrollToWaitlist = () => {
+    trackEvents.ctaClick("nav_get_early_access")
     document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -13,6 +15,7 @@ export function Navigation() {
         {/* Logo */}
         <a
           href="/"
+          onClick={() => trackEvents.linkClick("navigation", "logo_home")}
           className="flex items-center gap-1.5 sm:gap-2 hover:scale-105 transition-transform duration-300"
         >
           <img

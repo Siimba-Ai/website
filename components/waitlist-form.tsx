@@ -13,32 +13,44 @@ interface WaitlistFormData {
 
 export function WaitlistForm() {
   const [email, setEmail] = React.useState("")
-  const [useCase, setUseCase] = React.useState("personal")
+  const [useCase, setUseCase] = React.useState<"personal" | "work">("personal")
   const [openToInterview, setOpenToInterview] = React.useState(false)
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [isSuccess, setIsSuccess] = React.useState(false)
   const [error, setError] = React.useState("")
+  const hasTrackedFormIntent = React.useRef(false)
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return re.test(email)
   }
 
+  const trackFormIntent = () => {
+    if (!hasTrackedFormIntent.current) {
+      hasTrackedFormIntent.current = true
+      trackEvents.waitlistFormStarted()
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+    trackFormIntent()
 
     // Validation
     if (!email) {
       setError("Please enter your email address")
+      trackEvents.waitlistSubmitFailed("missing_email")
       return
     }
 
     if (!validateEmail(email)) {
       setError("Please enter a valid email address")
+      trackEvents.waitlistSubmitFailed("invalid_email")
       return
     }
 
+    trackEvents.waitlistSubmitStarted(useCase)
     setIsSubmitting(true)
 
     try {
@@ -108,13 +120,17 @@ export function WaitlistForm() {
       }
 
       trackEvents.waitlistJoined(useCase)
+      trackEvents.generateLead()
+      trackEvents.betaAccessRequested()
 
       setIsSuccess(true)
       setEmail("")
       setUseCase("personal")
       setOpenToInterview(false)
+      hasTrackedFormIntent.current = false
     } catch (err) {
       setError("Something went wrong. Please try again.")
+      trackEvents.waitlistSubmitFailed("submit_error")
     } finally {
       setIsSubmitting(false)
     }
@@ -165,7 +181,11 @@ export function WaitlistForm() {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={trackFormIntent}
+                    onChange={(e) => {
+                      trackFormIntent()
+                      setEmail(e.target.value)
+                    }}
                     placeholder="you@example.com"
                     className="glass-input pl-10 sm:pl-12 text-sm sm:text-base"
                     required
@@ -185,7 +205,11 @@ export function WaitlistForm() {
                   <button
                     type="button"
                     aria-pressed={useCase === "personal"}
-                    onClick={() => setUseCase("personal")}
+                    onClick={() => {
+                      trackFormIntent()
+                      setUseCase("personal")
+                      trackEvents.waitlistUseCaseSelected("personal")
+                    }}
                     className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
                       useCase === "personal"
                         ? "glass-button text-foreground font-semibold scale-[1.02] bg-primary/20 border-primary/70 ring-2 ring-primary/30 shadow-lg"
@@ -197,7 +221,11 @@ export function WaitlistForm() {
                   <button
                     type="button"
                     aria-pressed={useCase === "work"}
-                    onClick={() => setUseCase("work")}
+                    onClick={() => {
+                      trackFormIntent()
+                      setUseCase("work")
+                      trackEvents.waitlistUseCaseSelected("work")
+                    }}
                     className={`flex-1 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-sm font-medium transition-all duration-300 ${
                       useCase === "work"
                         ? "glass-button text-foreground font-semibold scale-[1.02] bg-primary/20 border-primary/70 ring-2 ring-primary/30 shadow-lg"
@@ -215,7 +243,11 @@ export function WaitlistForm() {
                   <input
                     type="checkbox"
                     checked={openToInterview}
-                    onChange={(e) => setOpenToInterview(e.target.checked)}
+                    onChange={(e) => {
+                      trackFormIntent()
+                      setOpenToInterview(e.target.checked)
+                      trackEvents.waitlistInterviewToggled(e.target.checked)
+                    }}
                     className="sr-only"
                   />
                   <div
@@ -271,6 +303,10 @@ export function WaitlistForm() {
         href={calendlyUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => {
+          trackEvents.ctaClick("waitlist_calendly")
+          trackEvents.linkClick("waitlist_form", "calendly")
+        }}
         className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-foreground/70 hover:text-foreground transition-all duration-300 group"
       >
         <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
