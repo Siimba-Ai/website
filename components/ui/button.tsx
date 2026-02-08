@@ -3,25 +3,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:translate-y-[1px]",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-base font-semibold transition-all duration-300 spring-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground border border-primary hover:bg-primary/90 hover:-translate-y-[1px] hover:shadow-lg",
+        default: "bg-sage text-charcoal hover:bg-sage/90 hover:shadow-2xl hover:shadow-sage/40 hover:-translate-y-0.5 active:translate-y-0",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-pink/30 backdrop-blur-md text-[#C85A6E] hover:bg-pink/40 border border-pink/30",
         outline:
-          "border border-primary/20 bg-transparent text-foreground hover:border-primary/40 hover:bg-primary/5 hover:-translate-y-[1px]",
+          "border-2 border-charcoal/20 glass-card hover:glass-elevated hover:border-sage/40",
         secondary:
-          "bg-transparent border border-muted text-foreground hover:border-muted-foreground/40 hover:bg-muted/30",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-foreground underline-offset-4 hover:underline opacity-70 hover:opacity-100",
+          "bg-beige text-charcoal hover:bg-beige/80",
+        ghost: "hover:bg-accent/10 hover:text-accent-foreground",
+        link: "text-sage underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 px-3 text-xs",
-        lg: "h-11 px-8",
-        icon: "h-10 w-10",
+        default: "h-12 px-6 py-3",
+        sm: "h-10 px-4 py-2",
+        lg: "h-[48px] px-10 py-4",
+        xl: "h-16 px-10 py-5 text-xl",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {
@@ -33,7 +34,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
