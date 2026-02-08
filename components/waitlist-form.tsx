@@ -65,14 +65,19 @@ export function WaitlistForm() {
       const sheetURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL
 
       if (sheetURL) {
-        // Send to Google Sheets
+        // Send to Google Sheets (using "category" field name as expected by script)
         const response = await fetch(sheetURL, {
           method: "POST",
           mode: "no-cors", // Required for Google Apps Script
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            email: formData.email,
+            category: formData.useCase, // Map useCase to category for Google Sheets
+            interview: formData.interview,
+            timestamp: formData.timestamp,
+          }),
         })
 
         // Note: no-cors mode doesn't allow reading the response
