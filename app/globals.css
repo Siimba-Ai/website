@@ -58,6 +58,19 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* TravelPerk-inspired palette */
+    --bg-cream: #F5F1EB;
+    --bg-banner: #EDE9E3;
+    --text-dark: #1A1A1A;
+    --text-secondary: #666666;
+    --accent-lime: #C3F53C;
+    --accent-lime-hover: #B5E635;
+    --accent-turquoise: #5DD9D2;
+    --accent-turquoise-hover: #4AC7C0;
+    --card-white: #FFFFFF;
+    --border-subtle: #E5E0DA;
+    --card-shadow: rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -185,7 +198,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-12px);
+      transform: translateY(-4px);
     }
   }
 
@@ -371,5 +384,21 @@
     .animate-scroll-banner {
       animation: none;
     }
+  }
+
+  /* TravelPerk-inspired hero background */
+  .hero-bg {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, #F0EBE5 100%);
+  }
+
+  /* Card grounded effect - subtle shadow */
+  .card-float {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.06));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .card-float:hover {
+    transform: translateY(-2px) scale(1.01);
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
   }
 }
