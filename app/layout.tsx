@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   keywords: ['AI assistant', 'productivity', 'decision management', 'ADHD', 'task management', 'daily planning'],
   authors: [{ name: 'Siimba' }],
   icons: {
-    icon: '/static/siimba-icon.png',
-    shortcut: '/static/siimba-icon.png',
-    apple: '/static/siimba-icon.png',
+    icon: '/static/sii-logo.png',
+    shortcut: '/static/sii-logo.png',
+    apple: '/static/sii-logo.png',
   },
   openGraph: {
     title: 'Siimba | You wake up. You swipe yes 4 times. Your day is handled.',

@@ -19,7 +19,7 @@ export function Navigation() {
           className="flex items-center gap-1.5 sm:gap-2 hover:scale-105 transition-transform duration-300"
         >
           <img
-            src="/logo.png"
+            src="/static/sii-logo.png"
             alt="Siimba"
             className="h-16 sm:h-20 md:h-24 w-auto"
           />
@@ -28,15 +28,25 @@ export function Navigation() {
           </span>
         </a>
 
-        {/* CTA */}
-        <button
-          onClick={scrollToWaitlist}
-          className="text-foreground text-xs sm:text-sm font-medium flex items-center gap-1 group hover:opacity-80 transition-opacity duration-300"
-        >
-          <span className="hidden xs:inline">Get early access</span>
-          <span className="xs:hidden">Join</span>
-          <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-        </button>
+        {/* CTAs */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/siimba"}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvents.ctaClick("nav_book_demo")}
+            className="glass-button text-foreground text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-full hover:opacity-90 transition-opacity duration-300"
+          >
+            Book a demo
+          </a>
+          <button
+            onClick={scrollToWaitlist}
+            className="glass-button-primary text-foreground text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-full flex items-center gap-1 group"
+          >
+            Join
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </button>
+        </div>
       </div>
     </nav>
   )

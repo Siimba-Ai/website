@@ -300,4 +300,76 @@
   .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
   .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
   .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Float delayed variants for staggered floating animations */
+  .animate-float-delayed-1 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0s;
+  }
+
+  .animate-float-delayed-2 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-float-delayed-3 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .animate-float-delayed-4 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  .animate-float-delayed-5 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  .animate-float-delayed-6 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 2.5s;
+  }
+
+  /* Infinite horizontal scroll for banner */
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-banner {
+    animation: scroll-banner 20s linear infinite;
+  }
+
+  /* Responsive scroll speeds */
+  @media (max-width: 1023px) {
+    .animate-scroll-banner {
+      animation: scroll-banner 15s linear infinite;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .animate-scroll-banner {
+      animation: scroll-banner 10s linear infinite;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-delayed-1,
+    .animate-float-delayed-2,
+    .animate-float-delayed-3,
+    .animate-float-delayed-4,
+    .animate-float-delayed-5,
+    .animate-float-delayed-6,
+    .animate-scroll-banner {
+      animation: none;
+    }
+  }
 }
