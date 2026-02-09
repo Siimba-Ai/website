@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer"
 import { DemoCard } from "@/components/demo-card"
 import { WaitlistForm } from "@/components/waitlist-form"
 import { HowItWorks } from "@/components/how-it-works"
-import { HeroSection } from "@/components/hero-section"
+import { HeroExactReplica } from "@/components/hero-exact-replica"
 import { ScrollingBanner } from "@/components/scrolling-banner"
 import { trackEvents } from "@/lib/analytics"
 
@@ -71,32 +71,26 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat blur-lg scale-105"
-        style={{ backgroundImage: "url(/hero-bg.jpg)" }}
-      />
-      {/* Blue tint overlay */}
-      <div className="fixed inset-0 bg-primary/10" />
-
+    <div className="relative min-h-screen" style={{ backgroundColor: "var(--bg-cream)" }}>
       {/* Content */}
       <div className="relative z-10">
         <Navigation />
 
-        {/* Hero Section */}
-        <HeroSection />
+        {/* Hero Section - TravelPerk Exact Replica */}
+        <HeroExactReplica />
 
-        {/* Scrolling Banner */}
-        <ScrollingBanner />
+        {/* Scrolling Banner - Right where hand ends */}
+        <div style={{ marginTop: "-11px" }}>
+          <ScrollingBanner />
+        </div>
+
+        {/* How It Works Section */}
+        <HowItWorks />
 
         {/* Waitlist Section */}
         <section id="waitlist" className="relative py-10 sm:py-16 px-4">
           <WaitlistForm />
         </section>
-
-        {/* How It Works Section */}
-        <HowItWorks />
 
 
         <Footer />
