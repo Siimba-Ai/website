@@ -80,7 +80,7 @@ export default function Home() {
         <HeroExactReplica />
 
         {/* Scrolling Banner - Right where hand ends */}
-        <div style={{ marginTop: "-11px" }}>
+        <div className="mt-0">
           <ScrollingBanner />
         </div>
 

@@ -40,7 +40,7 @@ export function StatBadge({
         scale: 1.05,
         transition: { duration: 0.2 },
       }}
-      className="absolute hidden lg:block bg-white rounded-full px-4 py-2 shadow-lg animate-float-delayed-2"
+      className="absolute hidden xl:block bg-white rounded-full px-4 py-2 shadow-lg animate-float-delayed-2"
       style={{
         top: position.top,
         bottom: position.bottom,

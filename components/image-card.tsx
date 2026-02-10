@@ -48,7 +48,7 @@ export function ImageCard({
         scale: 1.01,
         transition: { duration: 0.3 },
       }}
-      className={cn("absolute hidden lg:block rounded-2xl animate-float-delayed", className)}
+      className={cn("absolute hidden xl:block rounded-2xl animate-float-delayed", className)}
       style={{
         top: position.top,
         bottom: position.bottom,

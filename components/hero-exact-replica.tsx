@@ -8,14 +8,14 @@ import { StatBadge } from "@/components/stat-badge"
 
 export function HeroExactReplica() {
   return (
-    <section className="hero-bg pt-28 pb-0 px-4" style={{ minHeight: "calc(100vh - 80px)" }}>
-      <div className="max-w-[1400px] mx-auto h-full flex flex-col justify-center">
+    <section className="hero-bg pt-24 sm:pt-28 pb-0 px-4">
+      <div className="max-w-[1400px] mx-auto flex flex-col">
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.1] font-bold text-center mb-8 max-w-[900px] mx-auto tracking-tight"
+          className="relative text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.1] font-bold text-center mb-7 sm:mb-8 max-w-[960px] mx-auto tracking-tight"
           style={{ color: "var(--text-dark)", zIndex: 30 }}
         >
           Decision fatigue made{" "}
@@ -23,8 +23,8 @@ export function HeroExactReplica() {
         </motion.h1>
 
         {/* Phone + Floating Cards Container */}
-        <div className="relative w-full max-w-[1400px] mx-auto px-4" style={{ minHeight: "500px", marginTop: "-40px" }}>
-          <div className="relative flex items-center justify-center" style={{ minHeight: "500px" }}>
+        <div className="relative w-full max-w-[1400px] mx-auto -mt-2 sm:-mt-10">
+          <div className="relative flex items-center justify-center">
             {/* Central Phone */}
             <motion.img
               src="/static/holding-phone.png"
@@ -32,7 +32,7 @@ export function HeroExactReplica() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-[250px] sm:max-w-[310px] md:max-w-[370px] lg:max-w-[405px]"
+              className="relative block w-full max-w-[220px] sm:max-w-[310px] md:max-w-[370px] lg:max-w-[405px]"
               style={{ zIndex: 5 }}
             />
 
@@ -95,24 +95,6 @@ export function HeroExactReplica() {
             />
           </div>
 
-          {/* Mobile fallback - Grid layout below phone */}
-          <div className="lg:hidden mt-8 grid grid-cols-2 gap-4 max-w-md mx-auto">
-            <img
-              src="/static/what-emails.png"
-              alt="What emails need my attention?"
-              className="rounded-2xl shadow-lg w-full"
-            />
-            <img
-              src="/static/what-calendar.png"
-              alt="What's on my calendar?"
-              className="rounded-2xl shadow-lg w-full"
-            />
-            <img
-              src="/static/approve.png"
-              alt="Email approval"
-              className="rounded-2xl shadow-lg col-span-2 w-full"
-            />
-          </div>
         </div>
       </div>
     </section>

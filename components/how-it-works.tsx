@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Moon, MessageSquare, Layers } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -39,20 +39,36 @@ const features = [
 
 export function HowItWorks() {
   const [activeIndex, setActiveIndex] = useState(1)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)")
+    const handleChange = () => setIsMobile(mediaQuery.matches)
+
+    handleChange()
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange)
+      return () => mediaQuery.removeEventListener("change", handleChange)
+    }
+
+    mediaQuery.addListener(handleChange)
+    return () => mediaQuery.removeListener(handleChange)
+  }, [])
 
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-24 px-4" style={{ backgroundColor: "var(--bg-cream)" }}>
+    <section id="how-it-works" className="relative py-14 sm:py-24 px-4" style={{ backgroundColor: "var(--bg-cream)" }}>
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <h2
-            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
+            className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold mb-5 sm:mb-6"
             style={{ color: "var(--text-dark)" }}
           >
             Your day, handled
           </h2>
           <p
-            className="text-lg sm:text-xl max-w-[800px] mx-auto leading-relaxed"
+            className="text-base sm:text-xl max-w-[800px] mx-auto leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
             Free up your time with decision synthesis, prioritized morning stacks, and simple approve/chat workflows.
@@ -60,7 +76,7 @@ export function HowItWorks() {
         </div>
 
         {/* Three cards - Interactive sizing based on active state */}
-        <div className="flex flex-col md:flex-row gap-12 items-center justify-center">
+        <div className="flex flex-col md:flex-row gap-6 sm:gap-10 md:gap-12 items-center justify-center">
           {features.map((feature, index) => {
             const isActive = activeIndex === index
             const Icon = feature.icon
@@ -72,7 +88,7 @@ export function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "0px" }}
                 animate={{
-                  scale: isActive ? 1.15 : 1,
+                  scale: isActive ? (isMobile ? 1 : 1.12) : 1,
                   zIndex: isActive ? 10 : 1,
                 }}
                 transition={{
@@ -83,36 +99,36 @@ export function HowItWorks() {
                   y: { duration: 0.6, delay: index * 0.1 },
                 }}
                 onClick={() => setActiveIndex(index)}
-                className="w-full md:w-[280px] h-[420px] rounded-[28px] flex flex-col overflow-hidden cursor-pointer relative"
+                className="w-full max-w-[360px] md:max-w-none md:w-[280px] min-h-[360px] md:h-[420px] rounded-[28px] flex flex-col overflow-hidden cursor-pointer relative"
                 style={{
                   backgroundColor: feature.bgColor,
                   boxShadow: isActive ? "0 20px 40px rgba(0,0,0,0.12)" : "0 4px 12px rgba(0,0,0,0.06)",
                 }}
-                whileHover={{ scale: isActive ? 1.15 : 1.04 }}
+                whileHover={isMobile ? { scale: 1 } : { scale: isActive ? 1.12 : 1.04 }}
               >
                 {/* Icon area */}
-                <div className="flex-1 flex items-center justify-center p-6">
+                <div className="flex-1 flex items-center justify-center p-5 sm:p-6">
                   <div
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
                     style={{ backgroundColor: feature.iconBg }}
                   >
                     <Icon
-                      className="w-10 h-10"
+                      className="w-8 h-8 sm:w-10 sm:h-10"
                       style={{ color: feature.textColor }}
                     />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 pt-0 flex flex-col">
+                <div className="p-5 pt-0 sm:p-6 sm:pt-0 flex flex-col">
                   <h3
-                    className="font-display text-lg font-bold mb-2"
+                    className="font-display text-lg sm:text-xl font-bold mb-2"
                     style={{ color: feature.textColor }}
                   >
                     {feature.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed"
+                    className="text-sm sm:text-[15px] leading-relaxed"
                     style={{ color: feature.descColor }}
                   >
                     {feature.description}
@@ -124,7 +140,7 @@ export function HowItWorks() {
         </div>
 
         {/* Navigation dots */}
-        <div className="flex items-center justify-center gap-2.5 mt-[58px]">
+        <div className="flex items-center justify-center gap-2.5 mt-10 sm:mt-[58px]">
           {features.map((_, index) => (
             <motion.button
               key={index}
