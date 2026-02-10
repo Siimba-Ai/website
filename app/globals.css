@@ -58,6 +58,19 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* TravelPerk-inspired palette */
+    --bg-cream: #F5F1EB;
+    --bg-banner: #EDE9E3;
+    --text-dark: #1A1A1A;
+    --text-secondary: #666666;
+    --accent-lime: #C3F53C;
+    --accent-lime-hover: #B5E635;
+    --accent-turquoise: #5DD9D2;
+    --accent-turquoise-hover: #4AC7C0;
+    --card-white: #FFFFFF;
+    --border-subtle: #E5E0DA;
+    --card-shadow: rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -185,7 +198,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-12px);
+      transform: translateY(-4px);
     }
   }
 
@@ -300,4 +313,92 @@
   .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
   .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
   .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Float delayed variants for staggered floating animations */
+  .animate-float-delayed-1 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0s;
+  }
+
+  .animate-float-delayed-2 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-float-delayed-3 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .animate-float-delayed-4 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  .animate-float-delayed-5 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  .animate-float-delayed-6 {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 2.5s;
+  }
+
+  /* Infinite horizontal scroll for banner */
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-banner {
+    animation: scroll-banner 20s linear infinite;
+  }
+
+  /* Responsive scroll speeds */
+  @media (max-width: 1023px) {
+    .animate-scroll-banner {
+      animation: scroll-banner 15s linear infinite;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .animate-scroll-banner {
+      animation: scroll-banner 10s linear infinite;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-delayed-1,
+    .animate-float-delayed-2,
+    .animate-float-delayed-3,
+    .animate-float-delayed-4,
+    .animate-float-delayed-5,
+    .animate-float-delayed-6,
+    .animate-scroll-banner {
+      animation: none;
+    }
+  }
+
+  /* TravelPerk-inspired hero background */
+  .hero-bg {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, #F0EBE5 100%);
+  }
+
+  /* Card grounded effect - subtle shadow */
+  .card-float {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.06));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .card-float:hover {
+    transform: translateY(-2px) scale(1.01);
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  }
 }
